@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Dr STIS</string>
+    <string name="loginTxt">Login</string>
+    <string name="usernameTxt">username</string>
+    <string name="passwordTxt">password</string>
+    <string name="login1Text">REGISTER</string>
+    <string name="login2Text">Lupa password?</string>
 </resources>

@@ -78,11 +78,11 @@
                 <EditText
                     android:id="@+id/keluhan_input"
                     android:layout_width="match_parent"
-                    android:layout_height="79dp"
+                    android:layout_height="80dp"
                     android:gravity="center_vertical"
                     android:hint="Ketik sebuah keluhan..."
                     android:inputType="textMultiLine|textCapSentences|text"
-                    android:maxLength="151"
+                    android:maxLength="150"
                     android:maxLines="5"
                     android:textSize="12dp" />
 

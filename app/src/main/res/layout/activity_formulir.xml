@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:layout_gravity="center_horizontal|center"
+    tools:context=".FormulirActivity">
+
+    <LinearLayout
+        android:id="@+id/linerID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="8dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="12dp"
+            android:textSize="24dp"
+            android:text="ISI FORMULIR" />
+
+        <TableLayout
+            android:id="@+id/tabel_layout"
+            android:layout_margin="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
+
+
+            <TableRow
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:text="Nama:" />
+
+                <TextView
+                    android:id="@+id/nama_input"
+                    android:layout_width="242dp"
+                    android:layout_height="35dp"
+                    android:gravity="center_vertical"
+                    android:text="Ini Sebuah Nama" />
+            </TableRow>
+
+            <TableRow android:gravity="center_vertical">
+
+                <TextView android:text="Tanggal:" />
+
+                <TextView
+                    android:id="@+id/tanggal_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:gravity="center_vertical"
+                    android:text="29 Desember 2018" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView android:text="Jam:" />
+
+                <TextView
+                    android:id="@+id/jam_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:gravity="center_vertical"
+                    android:text="09.00 - 09.30" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView android:text="Keluhan:" />
+
+                <EditText
+                    android:id="@+id/keluhan_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="79dp"
+                    android:gravity="center_vertical"
+                    android:hint="Ketik sebuah keluhan..."
+                    android:inputType="textMultiLine|textCapSentences|text"
+                    android:maxLength="151"
+                    android:maxLines="5"
+                    android:textSize="12dp" />
+
+            </TableRow>
+
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/keluhan_textCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0/150" />
+
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/button_submit"
+            android:textColor="#fff"
+            android:text="Submit" />
+
+    </LinearLayout>
+
+</ScrollView>

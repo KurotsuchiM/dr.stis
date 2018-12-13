@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="detail"
+        android:textStyle="bold" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow>
+
+            <TextView
+                android:layout_marginRight="8dp"
+                android:text="@string/statusText" />
+
+            <TextView
+                android:id="@+id/status_disetujui"
+                android:text="@string/disetujuiDefault" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_marginRight="8dp"
+                android:text="@string/jamText" />
+
+            <TextView
+                android:id="@+id/jam_input"
+                android:text="@string/jamDefault" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_marginRight="8dp"
+                android:text="@string/keluhanText" />
+
+            <TextView
+                android:id="@+id/keluhan_input"
+                android:text="@string/keluhanDefault" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_marginRight="8dp"
+                android:text="@string/dokterText" />
+
+            <TextView
+                android:id="@+id/dokter_name"
+                android:text="@string/dokterDefault" />
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

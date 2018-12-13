@@ -11,19 +11,17 @@ import android.widget.EditText;
 public class LoginActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "";
 
-    TextInputLayout userIn;
-    TextInputLayout passIn;
+    private TextInputLayout emailInput;
+    private TextInputLayout passwordInput;
     private Button loginButton;
-    private EditText usernameInput, passwordInput;
+    private String emailString, passwordString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        userIn = findViewById(R.id.username_Input);
-        loginButton = findViewById(R.id.loginButton);
-//        usernameInput = findViewById(R.id.username_Input);
+        init();
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,12 +32,17 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private String unpassLock(){
-        return  userIn.getEditText().getText().toString();
+    private void init() {
+        this.emailInput = findViewById(R.id.email_Input);
+        this.passwordInput = findViewById(R.id.password_Input);
+        this.loginButton = findViewById(R.id.loginButton);
+
+        this.emailString = emailInput.getEditText().getText().toString();
+        this.passwordString = passwordInput.getEditText().getText().toString();
     }
 
     private void startNext(){
-        String messageNext = unpassLock();
+        String messageNext = emailString;
         Intent intent = new Intent(this, DisplayMessageActivity.class);
         intent.putExtra(EXTRA_MESSAGE, messageNext);
         startActivity(intent);

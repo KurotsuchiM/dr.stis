@@ -22,9 +22,9 @@
         <activity android:name=".FormulirActivity" />
         <activity android:name=".DisplayMessageActivity" />
         <activity android:name=".ReservasiActivity" />
-        <activity android:name=".signupActivity" />
-        <activity android:name=".berandaActivity" />
-        <activity android:name=".cekJadwalActivity"></activity>
+        <activity android:name=".SignupActivity" />
+        <activity android:name=".BerandaActivity" />
+        <activity android:name=".CekJadwalActivity"></activity>
     </application>
 
 </manifest>

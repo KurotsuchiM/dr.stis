@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.content.Intent;
 import android.view.View;
 
-public class berandaActivity extends AppCompatActivity {
+public class BerandaActivity extends AppCompatActivity {
 
     Button cekJadwalButton, reservasiButton;
     @Override
@@ -20,18 +20,18 @@ public class berandaActivity extends AppCompatActivity {
         cekJadwalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(berandaActivity.this, cekJadwalActivity.class);
-                berandaActivity.this.startActivity(intent);
-                berandaActivity.this.finish();
+                Intent intent = new Intent(BerandaActivity.this, CekJadwalActivity.class);
+                BerandaActivity.this.startActivity(intent);
+                BerandaActivity.this.finish();
             }
         });
 
         reservasiButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(berandaActivity.this, ReservasiActivity.class);
-                berandaActivity.this.startActivity(intent);
-                berandaActivity.this.finish();
+                Intent intent = new Intent(BerandaActivity.this, ReservasiActivity.class);
+                BerandaActivity.this.startActivity(intent);
+                BerandaActivity.this.finish();
             }
         });
 

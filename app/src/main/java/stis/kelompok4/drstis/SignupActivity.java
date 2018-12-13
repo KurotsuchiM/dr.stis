@@ -3,7 +3,7 @@ package stis.kelompok4.drstis;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class signupActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

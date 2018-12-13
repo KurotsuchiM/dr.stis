@@ -3,7 +3,7 @@ package stis.kelompok4.drstis;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class cekJadwalActivity extends AppCompatActivity {
+public class CekJadwalActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

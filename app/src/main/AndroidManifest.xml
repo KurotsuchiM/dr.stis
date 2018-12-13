@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="stis.kelompok4.drstis">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,9 +21,9 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".FormulirActivity" />
         <activity android:name=".DisplayMessageActivity" />
-        <activity android:name=".ReservasiActivity"></activity>
+        <activity android:name=".ReservasiActivity" />
+        <activity android:name=".CalendarActivity" android:exported="true"></activity>
+        <activity android:name=".activity_jadwal" android:exported="true"></activity>
     </application>
-    
-    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>

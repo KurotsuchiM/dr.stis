@@ -17,24 +17,58 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:textAlignment="center"
-        android:text="TANGGAL"
+        android:text="pilih hari pemesanan"
         android:textSize="24dp"
         android:textAllCaps="true"
         />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="0dp"
         >
 
         <CalendarView
+            android:id="@+id/tanggal_itself"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             >
 
         </CalendarView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        >
+
+        <Button
+            android:id="@+id/tanggal_button_pesan"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/button_submit"
+            android:text="PESAN JADWAL"
+            android:textColor="#FFF"
+            android:textSize="24dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        >
+        <TextView
+            android:id="@+id/tanggal_button_textview"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="pesan untuk "
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="16dp" />
     </LinearLayout>
 
 </LinearLayout>

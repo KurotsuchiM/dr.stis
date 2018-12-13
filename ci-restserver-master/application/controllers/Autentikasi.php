@@ -1,6 +1,6 @@
 <?php 
 if(!defined('BASEPATH')) exit('No direct script access allowed');
-require APPPATH . '/libraries/REST_Controller.php';
+require (APPPATH . 'libraries/REST_Controller.php');
 
 use Restserver\Libraries\REST_Controller;
 /**
@@ -13,12 +13,7 @@ class Autentikasi extends REST_Controller
 	{
 		parent::__construct();
 		$this->load->model('pengunjung');
-		//print_r("expression");
 	}
-
-	/*
-	* http://localhost/ci-restserver-master/index.php/api/Autentikasi/login/
-	*/
 
 	public function login_post() {
 		//get data post
@@ -50,47 +45,26 @@ class Autentikasi extends REST_Controller
 		}
 	}
 
-	/*
-	* http://localhost/ci-restserver-master/index.php/api/Autentikasi/registration/
-	*/
 	public function registration_post() {
 		//get post data
 		$pengunjung_nama = strip_tags($this->post('pengunjung_nama'));
-		//print_r($pengunjung_nama);
-
-		$pengunjung_nim = strip_tags($this->post('pengunjung_nim'));
-		//print_r($pengunjung_nim);
-		
+		$pengujung_nim = strip_tags($this->post('pengujung_nim'));
 		$status = strip_tags($this->post('status'));
-		//print_r($status);
-			
 		$password = $this->post('password');
-		//print_r($password);
-		
 		$konfirmasi_password = $this->post('konfirmasi_password');
-		//print_r($konfirmasi_password);
-		
 		$email = strip_tags($this->post('email'));
-		//print_r($email);
-		
 		$nomor_telpon = strip_tags($this->post('nomor_telpon'));
-		//print_r($nomor_telpon);
-		
 		$jenis_kelamin = strip_tags($this->post('jenis_kelamin'));
-		//print_r($jenis_kelamin);
-		
 
 		//validasi post data
-		if(!empty($pengunjung_nama) && !empty($pengunjung_nim) && !empty($password) && !empty($konfirmasi_password) && !empty($email)) {
+		if(!empty($pengunjung_nama) && !empty($pengujung_nim) && !empty($password) && !empty($konfirmasi_password) && !empty($email)) {
 
 			//cek jika email ada
 			$con['returnType'] = 'count';
 			$con['conditions'] = array(
-				'email' => $email,
+				'email => $email',
 			);
-		//	print_r("expression");
-		//	print_r($con);
-			$pengunjungCount = $this->pengunjung->getRows($con);
+			$pengunjungCount = $this->user->getRows($con);
 
 			if($pengunjungCount > 0) {
 				$this->response("Email sudah pernah dipakai!", REST_Controller::HTTP_BAD_REQUEST);
@@ -98,7 +72,7 @@ class Autentikasi extends REST_Controller
 				//insert pengunjung 
 				$pengunjungData = array(
 					'pengunjung_nama' => $pengunjung_nama,
-					'pengunjung_nim' => $pengunjung_nim,
+					'pengujung_nim' => $pengujung_nim,
 					'status' => $status,
 					'password' => $password,
 					'konfirmasi_password' => $konfirmasi_password,
@@ -106,9 +80,9 @@ class Autentikasi extends REST_Controller
 					'nomor_telpon' => $nomor_telpon,
 					'jenis_kelamin' => $jenis_kelamin
 				);
-		//		print_r($pengunjungData);
-				$insert = $this->pengunjung->insertPengunjung($pengunjungData);
-		//		print_r($insert);
+
+				$insert = $this->pengunjung->insert($pengunjungData);
+
 				//cek jika sudah dimasukkan
 				if($insert) {
 					$this->response([
@@ -121,7 +95,7 @@ class Autentikasi extends REST_Controller
 				}
 			}
 		}else{
-			$this->response("Registrasi belum terisi semua!", REST_Controller::HTTP_BAD_REQUEST);
+			$this->response("Regitrasi belum terisi semua!", REST_Controller::HTTP_BAD_REQUEST);
 		}
 	}
 
@@ -129,12 +103,11 @@ class Autentikasi extends REST_Controller
 	* REQUEST_METHOD = 'GET'
 	8http://localhost/ci-restserver-master/index.php/api/Autentikasi/pengunjung/16.9395
 	*/
-
-	public function pengunjung_get($pengunjung_nim = '') {
+	
+	public function pengunjung_get($pengujung_nim = 0) {
 		//kembalikan semua data pengunjung jika tidak dispesifikasi
 		//selain itu sesuai request
-		print_r($pengunjung_nim);
-		$con = $pengunjung_nim?array('pengunjung_nim' => $pengunjung_nim):'';
+		$con = $pengujung_nim?array('pengujung_nim' => $pengujung_nim):'';
 		$pengunjung = $this->pengunjung->getRows($con);
 
 		//cek jika pengunjung sudah ada
@@ -147,51 +120,27 @@ class Autentikasi extends REST_Controller
 		}
 	}
 
-	/*
-	* REQUEST_METHOD = put
-	* http://localhost/ci-restserver-master/index.php/api/Autentikasi/pengunjung/
-	*/
 	public function pengunjung_put(){
-		$pengunjung_nim = $this->put('pengunjung_nim');
-		print_r($pengunjung_nim);
-		
+		$pengujung_nim = $this->put('pengujung_nim');
 
 		//Get post data
-		$pengunjung_nama = strip_tags($this->put('pengunjung_nama'));
-		print_r($pengunjung_nama);
-		
+		$pengunjung_nama = strip_tags($this->post('pengunjung_nama'));
+		$pengujung_nim = strip_tags($this->post('pengujung_nim'));
+		$status = strip_tags($this->post('status'));
+		$password = $this->post('password');
+		$konfirmasi_password = $this->post('konfirmasi_password');
+		$email = strip_tags($this->post('email'));
+		$nomor_telpon = strip_tags($this->post('nomor_telpon'));
+		$jenis_kelamin = strip_tags($this->post('jenis_kelamin'));
 
-		$pengunjung_nim = strip_tags($this->put('pengunjung_nim'));
-		print_r($pengunjung_nim);		
-
-		$status = strip_tags($this->put('status'));
-		print_r($status);
-		
-		$password = $this->put('password');
-		print_r($password);
-		
-		$konfirmasi_password = $this->put('konfirmasi_password');
-		print_r($konfirmasi_password);
-		
-		$email = strip_tags($this->put('email'));
-		print_r($email);
-		
-		$nomor_telpon = strip_tags($this->put('nomor_telpon'));
-		print_r($nomor_telpon);
-		
-		$jenis_kelamin = strip_tags($this->put('jenis_kelamin'));
-		print_r($jenis_kelamin);
-		
 		//validasi 
-		if(!empty($pengunjung_nama) && !empty($pengunjung_nim) && !empty(strip_tags($password)) && !empty(strip_tags($konfirmasi_password)) && !empty($email)) {
-			print_r("TEst");
-		
+		if(!empty($pengunjung_nama) && !empty($pengujung_nim) && !empty($password) && !empty($konfirmasi_password) && !empty($email)) {
 			$pengunjungData = array();
 			if(!empty($pengunjung_nama)) {
 				$pengunjungData['pengunjung_nama'] = $pengunjung_nama;
 			}
-			if(!empty($pengunjung_nim)) {
-				$pengunjungData['pengunjung_nim'] = $pengunjung_nim;
+			if(!empty($pengujung_nim)) {
+				$pengunjungData['pengujung_nim'] = $pengujung_nim;
 			}
 			if(!empty($status)) {
 				$pengunjungData['status'] = $status;
@@ -211,7 +160,7 @@ class Autentikasi extends REST_Controller
 			if(!empty($jenis_kelamin)) {
 				$pengunjungData['jenis_kelamin'] = $jenis_kelamin;
 			}
-			$update = $this->pengunjung->update($pengunjungData,$pengunjung_nim);
+			$update = $this->pengunjung->update($pengunjungData,$pengujung_nim);
 
 			if($update){
 				$this->response([
@@ -224,6 +173,7 @@ class Autentikasi extends REST_Controller
 		}else{
 			$this->response("Setidaknya da satu user diupdate!", REST_Controller::HTTP_BAD_REQUEST);
 		}
+		print_r("expression");
 	}
 }
  ?>

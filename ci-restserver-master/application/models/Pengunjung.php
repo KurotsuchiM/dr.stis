@@ -20,14 +20,16 @@ class Pengunjung extends CI_Model
 		$this->db->from($this->tabelPengunjung);
 
 		//fetch data by conditions
+		
 		if(array_key_exists("conditions", $params)) {
-			foreach ($$params['conditions'] as $key => $value) {
+			foreach ($params['conditions'] as $key => $value) {
+				//print_r($params['conditions']);
 				$this->db->where($key,$value);
 			}
 		}
 
-		if(array_key_exists("pengujung_nim", $params)) {
-			$this->db->where('pengujung_nim',$params['pengujung_nim']);
+		if(array_key_exists("pengunjung_nim", $params)) {
+			$this->db->where('pengunjung_nim',$params['pengunjung_nim']);
 			$query = $this->db->get();
 			$result = $query->row_array();
 		}else{
@@ -50,30 +52,29 @@ class Pengunjung extends CI_Model
 		return $result;
 	}
 
-	public function insert($data) {
-		if(!array_key_exists("tanggal_buat", $data)) {
-			$data['tanggal_buat'] = date("Y-m-d H:i:s");
-		}
-		if(!array_key_exists("modifikasi", $data)) {
-			$data['modifikasi'] = date("Y-m-d H:i:s");
-		}
+	public function insertPengunjung($data) {
 		$insert = $this->db->insert($this->tabelPengunjung, $data);
-
-		return $insert?$this->db->insert_id():false;
+		//print_r($data);
+		//print_r($this->tabelPengunjung);
+		if(empty($insert)) {
+			return false;
+		}else{
+			return true;
+		};
 	}
 
-	public function update($data,$pengujung_nim) {
+	public function update($data,$pengunjung_nim) {
 		if(!array_key_exists('modifikasi', $data)){
 			$data['modifikasi'] = date("Y-m-d H:i:s");
 		}
 
-		$update = $this->db->update($this->tabelPengunjung, $data, array('pengujung_nim' => $tabelPengunjung));
+		$update = $this->db->update($this->tabelPengunjung, $data, array('pengunjung_nim' => $pengunjung_nim));
 
 		return $update?true:false;
 	}
 
-	public function delete($pengujung_nim) {
-		$delete = $this->db->delete('pengunjung', array('pengujung_nim' => $pengujung_nim));
+	public function delete($pengunjung_nim) {
+		$delete = $this->db->delete('pengunjung', array('pengunjung_nim' => $pengunjung_nim));
 		return $delete?true:false;
 	}
 }

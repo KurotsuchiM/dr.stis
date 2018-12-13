@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 13, 2018 at 12:52 AM
+-- Generation Time: Dec 13, 2018 at 05:47 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.12
 
@@ -81,6 +81,7 @@ CREATE TABLE `pengunjung` (
   `pengunjung_nim` varchar(20) NOT NULL,
   `status` varchar(15) NOT NULL,
   `password` varchar(256) NOT NULL,
+  `konfirmasi_password` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `nomor_telpon` varchar(14) NOT NULL,
   `jenis_kelamin` varchar(10) NOT NULL,
@@ -93,38 +94,24 @@ CREATE TABLE `pengunjung` (
 -- Dumping data for table `pengunjung`
 --
 
-INSERT INTO `pengunjung` (`pengunjung_nama`, `pengunjung_nim`, `status`, `password`, `email`, `nomor_telpon`, `jenis_kelamin`, `tanggal_buat`, `modifikasi`, `status_akun`) VALUES
-('Alfian', '16.9000', 'Mahasiswa', '1213456', 'alfi@gmail.com', '081634982786', 'Laki-laki', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
-('Anonim2', '16.9308', 'mahasiswa', 'opf324', 'min@stis.ac.id', '089569550897', 'p', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
-('Anonim1', '16.9395', 'mahasiswa', '12f324', 'anom@stis.ac.id', '0895695505968', 'l', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
-('Mr. X', '19722200012414978', 'Dosen', '987654', 'suef@gmail.com', '08125487645', 'Laki-laki', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1);
+INSERT INTO `pengunjung` (`pengunjung_nama`, `pengunjung_nim`, `status`, `password`, `konfirmasi_password`, `email`, `nomor_telpon`, `jenis_kelamin`, `tanggal_buat`, `modifikasi`, `status_akun`) VALUES
+('Alfian', '16.9000', 'Mahasiswa', '1213456', '', 'alfi@gmail.com', '081634982786', 'Laki-laki', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+('Icha', '16.9110', 'Mahasiswa', '123456Abc', '123456Abc', 'icha@stis.ac.id', '08955984858', 'perempuan', '2018-12-13 05:33:10', '2018-12-13 05:33:10', 1),
+('Anonim2', '16.9308', 'mahasiswa', 'opf324', '', 'min@stis.ac.id', '089569550897', 'p', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+('Anonim1', '16.9395', 'mahasiswa', '12f324', '', 'anom@stis.ac.id', '0895695505968', 'l', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+('Mr. X', '19722200012414978', 'Dosen', '987654', '', 'suef@gmail.com', '08125487645', 'Laki-laki', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+('Icha', '1978304928030809', 'Mahasiswa', '123456Abc', '123456Abc', 'fa@stis.ac.id', '08955984858', 'perempuan', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+('Icha', '1978304928030830', 'Mahasiswa', '123456Abc', '123456Abc', 'ichha@stis.ac.id', '08955984858', 'perempuan', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+('Icha', '1978304928030832', 'Mahasiswa', '123456Abc', '123456Abc', 'ia@stis.ac.id', '08955984858', 'perempuan', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+('Icha', '1978304928030833', 'Mahasiswa', '123456Abc', '123456Abc', 'icc@stis.ac.id', '08955984858', 'perempuan', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `reservasi`
 --
-
-CREATE TABLE `reservasi` (
-  `reservasi_no` int(11) NOT NULL,
-  `reservasi_nim` varchar(20) NOT NULL,
-  `reservasi_dokter_nip` varchar(50) NOT NULL,
-  `reservasi_tanggal` date NOT NULL,
-  `reservasi_jam` time NOT NULL,
-  `keluhan` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `reservasi`
---
-
-INSERT INTO `reservasi` (`reservasi_no`, `reservasi_nim`, `reservasi_dokter_nip`, `reservasi_tanggal`, `reservasi_jam`, `keluhan`) VALUES
-(1, '16.9395', '199705042021011935', '2018-12-09', '23:00:00', 'sakit perut'),
-(2, '16.9308', '199705042021011935', '2018-12-11', '06:00:00', 'maag'),
-(3, '', '19980406202102356', '0000-00-00', '00:00:00', ''),
-(4, '', '19980406202102356', '0000-00-00', '00:00:00', ''),
-(5, '', '19980406202102356', '0000-00-00', '00:00:00', ''),
-(6, '', '19980406202102356', '0000-00-00', '00:00:00', '');
+-- Error reading structure for table dr.stis_tes.reservasi: #1932 - Table 'dr.stis_tes.reservasi' doesn't exist in engine
+-- Error reading data for table dr.stis_tes.reservasi: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM `dr.stis_tes`.`reservasi`' at line 1
 
 --
 -- Indexes for dumped tables
@@ -149,12 +136,6 @@ ALTER TABLE `pengunjung`
   ADD PRIMARY KEY (`pengunjung_nim`);
 
 --
--- Indexes for table `reservasi`
---
-ALTER TABLE `reservasi`
-  ADD PRIMARY KEY (`reservasi_no`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -163,12 +144,6 @@ ALTER TABLE `reservasi`
 --
 ALTER TABLE `kunci`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `reservasi`
---
-ALTER TABLE `reservasi`
-  MODIFY `reservasi_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

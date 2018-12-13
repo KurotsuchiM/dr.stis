@@ -60,6 +60,7 @@ $route['translate_uri_dashes'] = FALSE;
 */
 $route['api/example/users/(:num)'] = 'api/example/users/id/$1'; // Example 4
 $route['api/example/users/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'api/example/users/id/$1/format/$3$4'; // Example 8
-$route['api/autentikasi/login'] = 'api/autentikasi/login';
-$route['api/autentikasi/registration'] = 'api/autentikasi/registration';
-$route['api/autentikasi/pengunjung/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'api/autentikasi/pengunjung/pengujung_nim/$1/format/$3$4';
+$route['api/Autentikasi/login'] = 'api/Autentikasi/login';
+$route['api/Autentikasi/registration'] = 'api/Autentikasi/registration';
+$route['api/Autentikasi/pengunjung/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'api/Autentikasi/pengunjung/pengunjung_nim/$1';
+$route['api/Reservasi_buat/reservasi/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'api/Reservasi_buat/reservasi/reservasi_nim/$1';

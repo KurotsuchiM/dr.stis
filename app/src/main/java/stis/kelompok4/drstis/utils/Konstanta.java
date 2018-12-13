@@ -1,4 +1,4 @@
-package stis.kelompok4.drstis;
+package stis.kelompok4.drstis.utils;
 
 public class Konstanta {
 	/**

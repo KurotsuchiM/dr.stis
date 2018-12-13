@@ -1,7 +1,9 @@
 <?php 
 if(!defined('BASEPATH')) exit('No direct script access allowed');
 require APPPATH . '/libraries/REST_Controller.php';
+
 use Restserver\Libraries\REST_Controller;
+
 /**
  * 
  */
@@ -13,7 +15,6 @@ class Reservasi extends REST_Controller
 	{
 		parent::__construct();
 		date_default_timezone_set('Asia/Jakarta');
-		$this->load->library('OneSignal');
 		$this->load->library('JWT/Auth');
 
 		//Cek header apa terdapat authorization

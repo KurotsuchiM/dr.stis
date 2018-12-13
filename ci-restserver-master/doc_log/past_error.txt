@@ -1,0 +1,31 @@
+A PHP Error was encountered
+
+Severity: Warning
+
+Message: call_user_func_array() expects parameter 1 to be a valid callback, class 'Autentikasi' does not have a method 'index_post'
+
+Filename: libraries/REST_Controller.php
+
+Line Number: 742
+
+Backtrace:
+
+File: /opt/lampp/htdocs/ci-restserver-master/application/libraries/REST_Controller.php
+Line: 742
+Function: call_user_func_array
+
+File: /opt/lampp/htdocs/ci-restserver-master/index.php
+Line: 315
+Function: require_once
+
+{"status":false,"error":"Unknown method"}
+
+----cek seharusnya request pethod disesuaikan (ketika get ya get bukan post)
+
+===================================================
+$route['api/Autentikasi/user/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'api/Autentikasi/pengunjung/pengunjung_nim/$1/format/$3$4'
+buat akses :
+http://localhost/ci-restserver-master/index.php/api/Autentikasi/pengunjung/16.9395
+tidak kebaca titiknya karena titik dianggap slash yang lain jadi 
+$route['api/Autentikasi/user/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'api/Autentikasi/pengunjung/pengunjung_nim/$1'
+==================================================

@@ -39,12 +39,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        lupaPasswordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToLupaPass();
-            }
-        });
+//        lupaPasswordButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                goToLupaPass();
+//            }
+//        });
 
     }
 
@@ -54,6 +54,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void goToDaftar() {
         //TODO: Bikin intent ke daftar page
+        Intent intent = new Intent(this, SignupActivity.class);
+        startActivity(intent);
     }
 
     private void init() {
@@ -61,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         this.passwordInput = findViewById(R.id.password_Input);
         this.loginButton = findViewById(R.id.loginButton);
         this.daftarButton = findViewById(R.id.daftar_button);
-        this.lupaPasswordButton = findViewById(R.id.lupa_password_button);
+//        this.lupaPasswordButton = findViewById(R.id.lupa_password_button);
 
         this.emailString = emailInput.getEditText().getText().toString();
         this.passwordString = passwordInput.getEditText().getText().toString();
@@ -69,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void startNext(){
         String messageNext = emailString;
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
+        Intent intent = new Intent(this, BerandaActivity.class);
         intent.putExtra(EXTRA_MESSAGE, messageNext);
         startActivity(intent);
     }

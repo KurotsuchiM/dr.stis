@@ -36,7 +36,7 @@ class reservasi extends CI_Model
 	}
 
 	public function get_user_by_id($pengunjung_nim){
-		$this->db->where('pengunjung_nim',$pengunjung_nim);
+		$this->db->where('pengunjung_email',$pengunjung_email);
 		$query = $this->db->get('pengunjung');
 		return $query->result_array();
 	}

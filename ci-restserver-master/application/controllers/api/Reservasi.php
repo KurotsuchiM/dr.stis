@@ -36,7 +36,7 @@ class Reservasi extends REST_Controller
 
 		//Simpan detail akun yang request, beupa reservasi_nim
 
-		$this->reservasi_nim = $payload->data->reservasi_nim;
+		$this->reservasi_email = $payload->data->reservasi_email;
 	}
 	//kirim formulir
 	public function index_post(){
@@ -57,7 +57,7 @@ class Reservasi extends REST_Controller
 			$daftar = $this->Reservasi->getList($reservasi_nim)->row_array();
 			if(!$daftar) return;
 
-			$pengunjung = $this->Reservasi->get_user_by_id($reservasi_nim);
+			$pengunjung = $this->Reservasi->get_user_by_id($reservasi_email);
 			if($pengunjung) $daftar['pengunjung_nama'] = $pengunjung;
 
 

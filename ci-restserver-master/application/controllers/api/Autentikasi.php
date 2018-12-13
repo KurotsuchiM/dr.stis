@@ -11,7 +11,7 @@ class Autentikasi extends REST_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('pengunjung');
+		$this->load->model('Pengunjung');
 	}
 
 	public function login_post() {

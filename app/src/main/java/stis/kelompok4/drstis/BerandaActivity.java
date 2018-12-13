@@ -15,23 +15,21 @@ public class BerandaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_beranda);
 
         cekJadwalButton = (Button) findViewById(R.id.cekJadwalButton);
-        reservasiButton = (Button) findViewById(R.id.reservasiButton);
+        reservasiButton = (Button) findViewById(R.id.loginButton);
 
         cekJadwalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BerandaActivity.this, CekJadwalActivity.class);
                 BerandaActivity.this.startActivity(intent);
-                BerandaActivity.this.finish();
             }
         });
 
         reservasiButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BerandaActivity.this, ReservasiActivity.class);
+                Intent intent = new Intent(BerandaActivity.this, LoginActivity.class);
                 BerandaActivity.this.startActivity(intent);
-                BerandaActivity.this.finish();
             }
         });
 

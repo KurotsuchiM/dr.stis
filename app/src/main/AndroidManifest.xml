@@ -24,6 +24,9 @@
         <activity android:name=".ReservasiActivity" />
         <activity android:name=".CalendarActivity" android:exported="true"></activity>
         <activity android:name=".activity_jadwal" android:exported="true"></activity>
+        <activity android:name=".SignupActivity" />
+        <activity android:name=".BerandaActivity" />
+        <activity android:name=".CekJadwalActivity"></activity>
     </application>
 
 </manifest>

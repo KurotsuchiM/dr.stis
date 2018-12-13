@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "";
@@ -15,6 +16,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout passwordInput;
     private Button loginButton;
     private String emailString, passwordString;
+    private TextView daftarButton, lupaPasswordButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +32,36 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        daftarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToDaftar();
+            }
+        });
+
+        lupaPasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToLupaPass();
+            }
+        });
+
+    }
+
+    private void goToLupaPass() {
+        //TODO: Bikin intent ke lupa pass page
+    }
+
+    private void goToDaftar() {
+        //TODO: Bikin intent ke daftar page
     }
 
     private void init() {
         this.emailInput = findViewById(R.id.email_Input);
         this.passwordInput = findViewById(R.id.password_Input);
         this.loginButton = findViewById(R.id.loginButton);
+        this.daftarButton = findViewById(R.id.daftar_button);
+        this.lupaPasswordButton = findViewById(R.id.lupa_password_button);
 
         this.emailString = emailInput.getEditText().getText().toString();
         this.passwordString = passwordInput.getEditText().getText().toString();

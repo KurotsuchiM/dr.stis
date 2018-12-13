@@ -1,13 +1,12 @@
 package stis.kelompok4.drstis;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +19,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivityCopy1 extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "";
     public static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
@@ -50,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startNext();
+                makeLogin();
             }
         });
 
@@ -61,6 +60,16 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        lupaPasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToLupaPass();
+            }
+        });
+    }
+
+    private void goToLupaPass() {
+        //TODO: Bikin intent ke lupa pass page
     }
 
     private void goToDaftar() {
@@ -74,14 +83,12 @@ public class LoginActivity extends AppCompatActivity {
         this.passwordInput = findViewById(R.id.password_Input);
         this.loginButton = findViewById(R.id.loginButton);
         this.daftarButton = findViewById(R.id.daftar_button);
-
-        this.emailString = emailInput.getEditText().getText().toString();
-        this.passwordString = passwordInput.getEditText().getText().toString();
+        this.lupaPasswordButton = findViewById(R.id.lupa_password_button);
     }
 
     private void startNext(){
         String messageNext = emailString;
-        Intent intent = new Intent(this, BerandaActivity.class);
+        Intent intent = new Intent(this, DisplayMessageActivity.class);
         intent.putExtra(EXTRA_MESSAGE, messageNext);
         startActivity(intent);
     }
@@ -171,5 +178,6 @@ public class LoginActivity extends AppCompatActivity {
                 .build();
         return retrofit;
     }
+
 
 }

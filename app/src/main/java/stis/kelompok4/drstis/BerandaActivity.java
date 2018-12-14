@@ -10,7 +10,8 @@ import android.widget.TextView;
 public class BerandaActivity extends AppCompatActivity {
 
     Boolean isLogin = false;
-    Button cekJadwalButton, loginButton;
+    TextView logoutTextView;
+    Button cekJadwalButton, loginButton, reservasiButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,11 +34,19 @@ public class BerandaActivity extends AppCompatActivity {
 
         cekJadwalButton = (Button) findViewById(R.id.cekJadwalButton);
         loginButton = (Button) findViewById(R.id.loginButton);
+        reservasiButton = (Button) findViewById(R.id.reservasiButton);
+        logoutTextView = (TextView) findViewById(R.id.logoutTextView);
+
 
         if(isLogin){
-            loginButton.setVisibility(View.INVISIBLE);
+            loginButton.setVisibility(View.GONE);
+            logoutTextView.setVisibility(View.VISIBLE);
+            reservasiButton.setVisibility(View.VISIBLE);
+
         }else{
             loginButton.setVisibility(View.VISIBLE);
+            logoutTextView.setVisibility(View.GONE);
+            reservasiButton.setVisibility(View.GONE);
         }
 
         cekJadwalButton.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +61,14 @@ public class BerandaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BerandaActivity.this, LoginActivity.class);
+                BerandaActivity.this.startActivity(intent);
+            }
+        });
+
+        logoutTextView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(BerandaActivity.this, BerandaActivity.class);
                 BerandaActivity.this.startActivity(intent);
             }
         });

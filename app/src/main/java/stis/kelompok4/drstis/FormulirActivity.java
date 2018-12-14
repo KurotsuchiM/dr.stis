@@ -1,5 +1,6 @@
 package stis.kelompok4.drstis;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -8,7 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class FormulirActivity extends AppCompatActivity {
@@ -55,7 +60,33 @@ public class FormulirActivity extends AppCompatActivity {
     private void submitFormulir() {
         //TODO: buat retrofit untuk mensubmit formulir ke webservice.
         Retrofit retrofit = RetrofitAdapter.getInstance()
-                .getRetrofitAdapter("https://localhost/");
+                .getRetrofitAdapter("https://dr-polstat.000webhostapp.com/index.php/api/");
+        FormulirApi formulirApi = retrofit.create(FormulirApi.class);
+
+        String tanggalReservasi = "";
+        String jamReservasi = "";
+        String keluhan = mEditText.getText().toString();
+
+        Call<FormulirResponse> call = formulirApi.sendFormulir(tanggalReservasi, jamReservasi, keluhan);
+        call.enqueue(new Callback<FormulirResponse>() {
+            @Override
+            public void onResponse(Call<FormulirResponse> call, Response<FormulirResponse> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(getApplicationContext(), "Error disini: "+response.code(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Toast.makeText(getApplicationContext(), "Berhasil membuat request",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(FormulirActivity.this, BerandaActivity.class);
+                FormulirActivity.this.startActivity(intent);
+                FormulirActivity.this.finish();
+            }
+
+            @Override
+            public void onFailure(Call<FormulirResponse> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Error disini: "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                return;
+            }
+        });
 
 
     }

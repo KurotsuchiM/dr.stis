@@ -5,27 +5,50 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.content.Intent;
 import android.view.View;
+import android.widget.TextView;
 
 public class BerandaActivity extends AppCompatActivity {
 
-    Button cekJadwalButton, reservasiButton;
+    Boolean isLogin = false;
+    Button cekJadwalButton, loginButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beranda);
 
+        TextView nama = (TextView) findViewById(R.id.nama);
+
+        /**
+         * Kita cek apakah ada Bundle atau tidak
+         */
+        if(getIntent().getExtras()!=null) {
+            /**
+             * Jika Bundle ada, ambil data dari Bundle
+             */
+            Bundle bundle = getIntent().getExtras();
+            nama.setText(bundle.getString("data3"));
+            isLogin = bundle.getBoolean("data4");
+
+        }
+
         cekJadwalButton = (Button) findViewById(R.id.cekJadwalButton);
-        reservasiButton = (Button) findViewById(R.id.loginButton);
+        loginButton = (Button) findViewById(R.id.loginButton);
+
+        if(isLogin){
+            loginButton.setVisibility(View.INVISIBLE);
+        }else{
+            loginButton.setVisibility(View.VISIBLE);
+        }
 
         cekJadwalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BerandaActivity.this, CekJadwalActivity.class);
+                Intent intent = new Intent(BerandaActivity.this, CalendarActivity.class);
                 BerandaActivity.this.startActivity(intent);
             }
         });
 
-        reservasiButton.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BerandaActivity.this, LoginActivity.class);

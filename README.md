@@ -28,6 +28,7 @@ Ini adalah panduan instalasi aplikasi android:
 ## Cara Penggunaan
 1. Gini
 2. Gitu
+Jika terjadi kesalahan silakan cek trobleshoot yang ada di [wiki-page](https://goole.com). Jika masalah tidak terdapat penyelesaian di wiki, silakan hubungi kami di [About-Us](https://google.com) page.
 
 ## Untuk Pengembang
 Anda adalah developer? Jika Anda ingin mengembangkan aplikasi yang sudah kami buat Anda dapat terlebih dahulu membaca panduan pengembang di [For-Develover](https://google.com) page.

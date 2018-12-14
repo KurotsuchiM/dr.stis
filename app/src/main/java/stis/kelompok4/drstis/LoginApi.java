@@ -11,9 +11,9 @@ public interface LoginApi {
 
     @FormUrlEncoded
 //    @Headers("X-API-KEY: coba")
-    @POST("Autentikasi/login")
+    @POST("autentikasi/login")
     Call<LoginResponse> createLogin(
-            @Header("x-api-key") String xKey,
+//            @Header("x-api-key") String xKey,
             @Field("email") String email,
             @Field("password") String password
     );

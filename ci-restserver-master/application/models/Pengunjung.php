@@ -64,10 +64,7 @@ class Pengunjung extends CI_Model
 	}
 
 	public function update($data,$pengunjung_nim) {
-		if(!array_key_exists('modifikasi', $data)){
-			$data['modifikasi'] = date("Y-m-d H:i:s");
-		}
-
+		
 		$update = $this->db->update($this->tabelPengunjung, $data, array('pengunjung_nim' => $pengunjung_nim));
 
 		return $update?true:false;
@@ -77,19 +74,6 @@ class Pengunjung extends CI_Model
 		$delete = $this->db->delete('pengunjung', array('pengunjung_nim' => $pengunjung_nim));
 		return $delete?true:false;
 	}
-
-	function checkRefreshToken($pengunjung_nim, $refreshToken){
-        $where = array(
-            'pengunjung_nim' => $pengunjung_nim,
-            'refreshToken' => $refreshToken
-        );
-        $this->db->where($where);
-        $res = $this->db->get('pengunjung');
-        if($res->num_rows() == 1)
-            return true;
-        else false;
-
-    }
 
     function updateLoginPertama($pengunjung_nim) {
         $now = date('Y-m-d H:i:s');
@@ -113,27 +97,6 @@ class Pengunjung extends CI_Model
                 ->update('pengunjung');
     }
 
-
-    /*
-    * $dat berisi 'id' dan 'refresh'
-    */
-    function setRefreshToken($dat){
-
-        $data = array(
-            'refreshToken' => $dat['refresh'],
-            'refreshExp' => date('Y-m-d H:i:s', $dat['rExp'])
-        );
-
-        $this->db->where('pengunjung_nim', $dat['pengunjung_nim']);
-        $this->db->update('pengunjung', $data);
-
-        return $this->db->error();
-    }
-
-    function getLoginTerakhir($pengunjung_nim) {
-        $que = $this->db->get_where('Pengunjung', array('pengunjung_nim' => $pengunjung_nim));
-        return $que->row()->loginTerakhir;
-    }
 }
 
  ?>

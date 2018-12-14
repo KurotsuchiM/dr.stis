@@ -1,5 +1,8 @@
 package stis.kelompok4.drstis;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -32,9 +35,13 @@ public class RetrofitAdapter {
      * @return Retrofit sesuai dengan baseURL.
      */
     public Retrofit getRetrofitAdapter(String baseURL){
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd HH:mm:ss")
+                .create();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseURL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         return retrofit;
     }

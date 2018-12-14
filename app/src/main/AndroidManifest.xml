@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
-        <activity android:name=".FormulirActivity" />
+        <activity android:name=".FormulirActivity" android:exported="true"/>
         <activity android:name=".DisplayMessageActivity" />
         <activity android:name=".ReservasiActivity" />
         <activity android:name=".CalendarActivity" android:exported="true"></activity>

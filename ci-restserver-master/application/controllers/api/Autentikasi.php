@@ -16,8 +16,7 @@ class Autentikasi extends REST_Controller
 		$this->load->model('pengunjung');
 		date_default_timezone_set('Asia/Jakarta');
         $this->load->database();
-		$this->load->library('JWT/Auth');
-
+	
 	}
 
 	/*
@@ -26,15 +25,7 @@ class Autentikasi extends REST_Controller
 
 	public function login_post() {
 		//get data post
-		$header = $this->input->get_request_header('X-API-KEY');
-
-		if(empty($header)) {
-			
-			$this->response('Tidak berhak akses', REST_Controller::HTTP_UNAUTHORIZED);
-			
-			return;
-		}
-
+		
 		$email = $this->post('email');
 		$password = $this->post('password');
 
@@ -48,9 +39,6 @@ class Autentikasi extends REST_Controller
 				'status_akun' => 1
 			);
 			$pengunjung = $this->pengunjung->getRows($con);
-			//////print_r($pengunjung);
-
-
 
 			if($pengunjung){
 				/*
@@ -80,32 +68,30 @@ class Autentikasi extends REST_Controller
 	* http://localhost/ci-restserver-master/index.php/api/Autentikasi/registration/
 	*/
 	public function registration_post() {
-		//////print_r("expression");
-		//////print_r($this->user);
 		//get post data
 		$pengunjung_nama = strip_tags($this->post('pengunjung_nama'));
-		//////print_r($pengunjung_nama);
+		//print_r($pengunjung_nama);
 
 		$pengunjung_nim = strip_tags($this->post('pengunjung_nim'));
-		//////print_r($pengunjung_nim);
+		//print_r($pengunjung_nim);
 		
 		$status = strip_tags($this->post('status'));
-		//////print_r($status);
+		//print_r($status);
 			
 		$password = $this->post('password');
-		//////print_r($password);
+		//print_r($password);
 		
 		$konfirmasi_password = $this->post('konfirmasi_password');
-		//////print_r($konfirmasi_password);
+		//print_r($konfirmasi_password);
 		
 		$email = strip_tags($this->post('email'));
-		//////print_r($email);
+		//print_r($email);
 		
 		$nomor_telpon = strip_tags($this->post('nomor_telpon'));
-		//////print_r($nomor_telpon);
+		//print_r($nomor_telpon);
 		
 		$jenis_kelamin = strip_tags($this->post('jenis_kelamin'));
-		//////print_r($jenis_kelamin);
+		//print_r($jenis_kelamin);
 		
 
 		//validasi post data
@@ -116,8 +102,8 @@ class Autentikasi extends REST_Controller
 			$con['conditions'] = array(
 				'email' => $email,
 			);
-		//	////print_r("expression");
-		//	////print_r($con);
+		//	print_r("expression");
+		//	print_r($con);
 			$pengunjungCount = $this->pengunjung->getRows($con);
 
 			if($pengunjungCount > 0) {
@@ -134,9 +120,9 @@ class Autentikasi extends REST_Controller
 					'nomor_telpon' => $nomor_telpon,
 					'jenis_kelamin' => $jenis_kelamin
 				);
-		//		////print_r($pengunjungData);
+		//		print_r($pengunjungData);
 				$insert = $this->pengunjung->insertPengunjung($pengunjungData);
-		//		////print_r($insert);
+		//		print_r($insert);
 				//cek jika sudah dimasukkan
 				if($insert) {
 					$this->response([

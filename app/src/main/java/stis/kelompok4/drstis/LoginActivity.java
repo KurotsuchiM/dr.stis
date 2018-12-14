@@ -179,7 +179,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Error: "+response.code(), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Pengunjung pengunjung = (Pengunjung) response.body().getData();
+                Pengunjung pengunjung = response.body().getData();
 
                 startNext(emailString, passwordString, pengunjung.getNamaPengunjung());
             }

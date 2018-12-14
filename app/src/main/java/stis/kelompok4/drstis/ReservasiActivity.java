@@ -27,7 +27,7 @@ public class ReservasiActivity extends AppCompatActivity {
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupPosition) {
-                if(lastExpandedPosition != -1 && groupPosition != lastExpandedPosition){
+                if (lastExpandedPosition != -1 && groupPosition != lastExpandedPosition) {
                     expandableListView.collapseGroup(lastExpandedPosition);
                 }
                 lastExpandedPosition = groupPosition;
@@ -36,22 +36,29 @@ public class ReservasiActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Dijalankan saat onCreate. Bertujuan menginisiasi semua field yang ada.
+     */
     private void init() {
-        this.expandableListView = (ExpandableListView) findViewById(R.id.expandable_list_view);
+        this.expandableListView = findViewById(R.id.expandable_list_view);
         this.listReservasi = getReservasi();
         this.expandableListIndex = new ArrayList<>(listReservasi.keySet());
         this.expandableListAdapter = new CustomExpandableListAdapter(this, expandableListIndex, listReservasi);
     }
 
-    private HashMap<String, Reservasi> getReservasi(){
+    /**
+     * Dijalankan saat inisiasi.
+     * @return HashMap String key, value berupa objek Reservasi.
+     */
+    private HashMap<String, Reservasi> getReservasi() {
         HashMap<String, Reservasi> listReservasi = new HashMap<>();
 
         /**
          * ini cuma contoh buat listnya
          * i: adalah jumlah barisnya mau berapa banya
          */
-        for (int i=1; i<15; i++){
-            listReservasi.put(i+"", new Reservasi("selesai", "disetujui", "2 Desember 2018", "09.00-09.30", "Sakit kepala", "dr. Sehat Utami"));
+        for (int i = 1; i < 15; i++) {
+            listReservasi.put(i + "", new Reservasi("selesai", "disetujui", "2 Desember 2018", "09.00-09.30", "Sakit kepala", "dr. Sehat Utami"));
         }
 
         return listReservasi;

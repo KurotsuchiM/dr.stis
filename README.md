@@ -2,11 +2,11 @@
 <p>Dokter STIS merupakan</p> 
 
 ## Daftar Isi
-* [Apa itu Dokter STIS?](https://google.com)
-* [Requirement](https://google.com)
-* [Instalasi](https://google.com)
-* [Cara Penggunaan](https://google.com)
-* [Untuk Pengembang](https://google.com)
+* [Apa itu Dokter STIS?](https://github.com/KurotsuchiM/dr.stis#dokter-stis)
+* [Requirement](https://github.com/KurotsuchiM/dr.stis#requirement)
+* [Instalasi](https://github.com/KurotsuchiM/dr.stis#instalasi)
+* [Cara Penggunaan](https://github.com/KurotsuchiM/dr.stis#cara-penggunaan)
+* [Untuk Pengembang](https://github.com/KurotsuchiM/dr.stis#untuk-pengembang)
 
 ## Requirement
 Disini ada 3 komponen penting dengan _system requirement_ berbeda:

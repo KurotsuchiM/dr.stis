@@ -170,7 +170,7 @@ public class LoginActivity extends AppCompatActivity {
                 .getRetrofitAdapter("https://dr-polstat.000webhostapp.com/index.php/api/");
         LoginApi loginApi = retrofit.create(LoginApi.class);
 
-        Call<LoginResponse> call = loginApi.createLogin(emailString, passwordString);
+        Call<LoginResponse> call = loginApi.createLogin("coba", emailString, passwordString);
 
         call.enqueue(new Callback<LoginResponse>() {
             @Override

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,12 +47,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         init();
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startNext();
+//                startNext("alfiyan@stis.ac.id","sayalupa","alfian");
                 makeLogin();
             }
         });
@@ -92,10 +94,15 @@ public class LoginActivity extends AppCompatActivity {
      * @param nama Nama dari pengguna didapat dari login.
      */
     private void startNext(String email, String password, String nama){
-        Intent intent = new Intent(this, BerandaActivity.class);
-        intent.putExtra(TEXT_EMAIL, email);
-        intent.putExtra(TEXT_PASSWORD, password);
-        intent.putExtra(TEXT_NAMA, nama);
+        Bundle bundle = new Bundle();
+        bundle.putString("data1", email);
+        bundle.putString("data2", password);
+        bundle.putString("data3", nama);
+        bundle.putBoolean("data4",true);
+        Intent intent = new Intent(LoginActivity.this, BerandaActivity.class);
+        intent.putExtras(bundle);
+//        intent.putExtra(TEXT_PASSWORD, password);
+//        intent.putExtra(TEXT_NAMA, nama);
         startActivity(intent);
     }
 
@@ -160,10 +167,10 @@ public class LoginActivity extends AppCompatActivity {
 
         //TODO: Bikin retofit login ke webservice login
         Retrofit retrofit = RetrofitAdapter.getInstance()
-                .getRetrofitAdapter("https://localhost/ci-restserver-master/api/autentikasi/");
+                .getRetrofitAdapter("https://dr-polstat.000webhostapp.com/index.php/api/");
         LoginApi loginApi = retrofit.create(LoginApi.class);
 
-        Call<LoginResponse> call = loginApi.createLogin("alfian@stis.ac.id", "somepass");
+        Call<LoginResponse> call = loginApi.createLogin("coba", emailString, passwordString);
 
         call.enqueue(new Callback<LoginResponse>() {
             @Override

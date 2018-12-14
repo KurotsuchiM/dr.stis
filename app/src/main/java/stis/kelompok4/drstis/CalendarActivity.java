@@ -68,8 +68,9 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent();
+                Intent intent = new Intent(CalendarActivity.this,activity_jadwal.class);
                 intent.putExtra("Tanggal", getSelectedFullDate());
+                startActivity(intent);
             }
         });
     }

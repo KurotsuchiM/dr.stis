@@ -83,7 +83,7 @@ public class LoginActivityCopy1 extends AppCompatActivity {
         this.passwordInput = findViewById(R.id.password_Input);
         this.loginButton = findViewById(R.id.loginButton);
         this.daftarButton = findViewById(R.id.daftar_button);
-        this.lupaPasswordButton = findViewById(R.id.lupa_password_button);
+//        this.lupaPasswordButton = findViewById(R.id.lupa_password_button);
     }
 
     private void startNext(){
@@ -138,27 +138,7 @@ public class LoginActivityCopy1 extends AppCompatActivity {
         Retrofit instance = getInstance("https://localhost/ci-restserver-master/api/autentikasi/");
         LoginApi loginApi = instance.create(LoginApi.class);
 
-        Call<List<LoginResponse>> call = loginApi.createLogin("alfian@stis.ac.id", "somepass");
 
-        call.enqueue(new Callback<List<LoginResponse>>() {
-            @Override
-            public void onResponse(Call<List<LoginResponse>> call, Response<List<LoginResponse>> response) {
-                if(!response.isSuccessful()){
-                    //TODO: response tidak sukses
-                    isLogin = false;
-                }
-                List<LoginResponse> loginResponseList = response.body();
-
-                for(LoginResponse loginResponse : loginResponseList){
-                    isLogin = loginResponse.isStatus_akun();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<LoginResponse>> call, Throwable t) {
-                isLogin = false;
-            }
-        });
 
         if (isLogin){
             Toast.makeText(getApplicationContext(), "Berhasil login", Toast.LENGTH_SHORT).show();

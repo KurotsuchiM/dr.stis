@@ -8,12 +8,16 @@ use Restserver\Libraries\REST_Controller;
  */
 class Autentikasi extends REST_Controller
 {
+	protected $user;
 	
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('pengunjung');
-		//print_r("expression");
+		date_default_timezone_set('Asia/Jakarta');
+        $this->load->database();
+		$this->load->library('JWT/Auth');
+
 	}
 
 	/*
@@ -22,12 +26,21 @@ class Autentikasi extends REST_Controller
 
 	public function login_post() {
 		//get data post
+		$header = $this->input->get_request_header('X-API-KEY');
+
+		if(empty($header)) {
+			
+			$this->response('Tidak berhak akses', REST_Controller::HTTP_UNAUTHORIZED);
+			
+			return;
+		}
+
 		$email = $this->post('email');
 		$password = $this->post('password');
 
 		//validasi data post
 		if(!empty($email) && !empty($password)) {
-			//cek jika ada pengunjung dengan credemtials
+			//cek jika ada pengunjung 
 			$con['returnType'] = 'single';
 			$con['conditions'] = array(
 				'email' => $email,
@@ -35,8 +48,19 @@ class Autentikasi extends REST_Controller
 				'status_akun' => 1
 			);
 			$pengunjung = $this->pengunjung->getRows($con);
+			//////print_r($pengunjung);
+
+
 
 			if($pengunjung){
+				/*
+		        * Catat waktu login
+		        * Jika login pertama kali, lewat Android
+		        */
+				if ($pengunjung['loginPertama'] == '')
+					$this->pengunjung->updateLoginPertama($pengunjung['pengunjung_nim']);
+				else $this->pengunjung->updateLoginTerakhir($pengunjung['pengunjung_nim']);
+				
 				$this->response([
 					'status_akun' => TRUE,
 					'pesan' => 'Login Berhasil!',
@@ -48,36 +72,40 @@ class Autentikasi extends REST_Controller
 		}else{
 			$this->response("Masukkan Email dan Password!", REST_Controller::HTTP_BAD_REQUEST);
 		}
+
 	}
+
 
 	/*
 	* http://localhost/ci-restserver-master/index.php/api/Autentikasi/registration/
 	*/
 	public function registration_post() {
+		//////print_r("expression");
+		//////print_r($this->user);
 		//get post data
 		$pengunjung_nama = strip_tags($this->post('pengunjung_nama'));
-		//print_r($pengunjung_nama);
+		//////print_r($pengunjung_nama);
 
 		$pengunjung_nim = strip_tags($this->post('pengunjung_nim'));
-		//print_r($pengunjung_nim);
+		//////print_r($pengunjung_nim);
 		
 		$status = strip_tags($this->post('status'));
-		//print_r($status);
+		//////print_r($status);
 			
 		$password = $this->post('password');
-		//print_r($password);
+		//////print_r($password);
 		
 		$konfirmasi_password = $this->post('konfirmasi_password');
-		//print_r($konfirmasi_password);
+		//////print_r($konfirmasi_password);
 		
 		$email = strip_tags($this->post('email'));
-		//print_r($email);
+		//////print_r($email);
 		
 		$nomor_telpon = strip_tags($this->post('nomor_telpon'));
-		//print_r($nomor_telpon);
+		//////print_r($nomor_telpon);
 		
 		$jenis_kelamin = strip_tags($this->post('jenis_kelamin'));
-		//print_r($jenis_kelamin);
+		//////print_r($jenis_kelamin);
 		
 
 		//validasi post data
@@ -88,8 +116,8 @@ class Autentikasi extends REST_Controller
 			$con['conditions'] = array(
 				'email' => $email,
 			);
-		//	print_r("expression");
-		//	print_r($con);
+		//	////print_r("expression");
+		//	////print_r($con);
 			$pengunjungCount = $this->pengunjung->getRows($con);
 
 			if($pengunjungCount > 0) {
@@ -106,9 +134,9 @@ class Autentikasi extends REST_Controller
 					'nomor_telpon' => $nomor_telpon,
 					'jenis_kelamin' => $jenis_kelamin
 				);
-		//		print_r($pengunjungData);
+		//		////print_r($pengunjungData);
 				$insert = $this->pengunjung->insertPengunjung($pengunjungData);
-		//		print_r($insert);
+		//		////print_r($insert);
 				//cek jika sudah dimasukkan
 				if($insert) {
 					$this->response([
@@ -125,6 +153,7 @@ class Autentikasi extends REST_Controller
 		}
 	}
 
+
 	/*
 	* REQUEST_METHOD = 'GET'
 	8http://localhost/ci-restserver-master/index.php/api/Autentikasi/pengunjung/16.9395
@@ -133,7 +162,7 @@ class Autentikasi extends REST_Controller
 	public function pengunjung_get($pengunjung_nim = '') {
 		//kembalikan semua data pengunjung jika tidak dispesifikasi
 		//selain itu sesuai request
-		print_r($pengunjung_nim);
+		//////print_r($pengunjung_nim);
 		$con = $pengunjung_nim?array('pengunjung_nim' => $pengunjung_nim):'';
 		$pengunjung = $this->pengunjung->getRows($con);
 
@@ -152,39 +181,41 @@ class Autentikasi extends REST_Controller
 	* http://localhost/ci-restserver-master/index.php/api/Autentikasi/pengunjung/
 	*/
 	public function pengunjung_put(){
+		//////print_r("expression");
 		$pengunjung_nim = $this->put('pengunjung_nim');
-		print_r($pengunjung_nim);
+		//////print_r($pengunjung_nim);
 		
+		////print_r("expression");
 
 		//Get post data
 		$pengunjung_nama = strip_tags($this->put('pengunjung_nama'));
-		print_r($pengunjung_nama);
+		////print_r($pengunjung_nama);
 		
-
+		////print_r("expression");
 		$pengunjung_nim = strip_tags($this->put('pengunjung_nim'));
-		print_r($pengunjung_nim);		
+		////print_r($pengunjung_nim);		
 
 		$status = strip_tags($this->put('status'));
-		print_r($status);
+		////print_r($status);
 		
 		$password = $this->put('password');
-		print_r($password);
+		////print_r($password);
 		
 		$konfirmasi_password = $this->put('konfirmasi_password');
-		print_r($konfirmasi_password);
+		////print_r($konfirmasi_password);
 		
 		$email = strip_tags($this->put('email'));
-		print_r($email);
+		////print_r($email);
 		
 		$nomor_telpon = strip_tags($this->put('nomor_telpon'));
-		print_r($nomor_telpon);
+		////print_r($nomor_telpon);
 		
 		$jenis_kelamin = strip_tags($this->put('jenis_kelamin'));
-		print_r($jenis_kelamin);
+		////print_r($jenis_kelamin);
 		
 		//validasi 
 		if(!empty($pengunjung_nama) && !empty($pengunjung_nim) && !empty(strip_tags($password)) && !empty(strip_tags($konfirmasi_password)) && !empty($email)) {
-			print_r("TEst");
+			////print_r("TEst");
 		
 			$pengunjungData = array();
 			if(!empty($pengunjung_nama)) {

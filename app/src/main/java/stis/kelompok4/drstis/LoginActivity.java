@@ -1,17 +1,15 @@
 package stis.kelompok4.drstis;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
 import java.util.regex.Pattern;
 
 import retrofit2.Call;
@@ -21,7 +19,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
-    public static final String EXTRA_MESSAGE = "";
+    public static final String TEXT_EMAIL = "";
+    public static final String TEXT_PASSWORD = "";
+    public static final String TEXT_NAMA = "";
+
     public static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     //"(?=.*[0-9])" +         //at least 1 digit
@@ -37,8 +38,8 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout passwordInput;
     private Button loginButton;
     private String emailString, passwordString;
-    private TextView daftarButton, lupaPasswordButton;
-    private boolean isLogin = false;
+    private TextView daftarButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,8 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startNext();
+//                startNext();
+                makeLogin();
             }
         });
 
@@ -63,31 +65,51 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Dijalankan saat onCreate. Bertujuan menginisiasi semua field yang ada.
+     */
+    private void init() {
+        this.emailInput = findViewById(R.id.email_Input);
+        this.passwordInput = findViewById(R.id.password_Input);
+        this.loginButton = findViewById(R.id.loginButton);
+        this.daftarButton = findViewById(R.id.daftar_button);
+    }
+
+    /**
+     * Dijalankan saat button daftar diklik. Bertujuan untuk menjalankan SignupActivity.
+     */
     private void goToDaftar() {
         //TODO: Bikin intent ke daftar page
         Intent intent = new Intent(this, SignupActivity.class);
         startActivity(intent);
     }
 
-    private void init() {
-        this.emailInput = findViewById(R.id.email_Input);
-        this.passwordInput = findViewById(R.id.password_Input);
-        this.loginButton = findViewById(R.id.loginButton);
-        this.daftarButton = findViewById(R.id.daftar_button);
-
-        this.emailString = emailInput.getEditText().getText().toString();
-        this.passwordString = passwordInput.getEditText().getText().toString();
-    }
-
-    private void startNext(){
-        String messageNext = emailString;
+    /**
+     * Dijalankan saat sudah berhasil login. Bertujuan untuk menjalankan BerandaActivity
+     * dengan tambahan parameter email, password, nama.
+     * @param email Email yang diinputkan pengguna.
+     * @param password Password yang diinputkan pengguna.
+     * @param nama Nama dari pengguna didapat dari login.
+     */
+    private void startNext(String email, String password, String nama){
         Intent intent = new Intent(this, BerandaActivity.class);
-        intent.putExtra(EXTRA_MESSAGE, messageNext);
+        intent.putExtra(TEXT_EMAIL, email);
+        intent.putExtra(TEXT_PASSWORD, password);
+        intent.putExtra(TEXT_NAMA, nama);
         startActivity(intent);
     }
 
+    /**
+     * Dijalankan saat button login diklik. Memvalidasi emailString.
+     * @return true jika emailString valid. Sebaliknya.
+     */
     private boolean validasiEmail(){
-        this.emailString = emailInput.getEditText().getText().toString();
+        try {
+            this.emailString = emailInput.getEditText().getText().toString();
+        } catch (Exception e) {
+            Toast.makeText(this,e.getMessage(),Toast.LENGTH_SHORT).show();
+            return false;
+        }
         if(emailString.isEmpty()){
             emailInput.setError("Email tidak boleh kosong");
             return false;
@@ -105,8 +127,17 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Dijalankan saat button login diklik. Memvalidasi passwordString.
+     * @return true jika passwordString valid. Sebaliknya.
+     */
     private boolean validasiPassword(){
-        this.passwordString = passwordInput.getEditText().getText().toString();
+        try {
+            this.passwordString = passwordInput.getEditText().getText().toString();
+        } catch (Exception e) {
+            Toast.makeText(this,e.getMessage(),Toast.LENGTH_SHORT).show();
+            return false;
+        }
         if(passwordString.isEmpty()){
             passwordInput.setError("Password tidak boleh kosong");
             return false;
@@ -119,57 +150,39 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Dijalankan saat button login diklik. Seluruh logic untuk login ada disini.
+     */
     private void makeLogin(){
         if(!validasiEmail() | !validasiPassword()){
             return;
         }
 
-
-
-
         //TODO: Bikin retofit login ke webservice login
-        Retrofit instance = getInstance("https://localhost/ci-restserver-master/api/autentikasi/");
-        LoginApi loginApi = instance.create(LoginApi.class);
+        Retrofit retrofit = RetrofitAdapter.getInstance()
+                .getRetrofitAdapter("https://localhost/ci-restserver-master/api/autentikasi/");
+        LoginApi loginApi = retrofit.create(LoginApi.class);
 
-        Call<List<LoginResponse>> call = loginApi.createLogin("alfian@stis.ac.id", "somepass");
+        Call<LoginResponse> call = loginApi.createLogin("alfian@stis.ac.id", "somepass");
 
-        call.enqueue(new Callback<List<LoginResponse>>() {
+        call.enqueue(new Callback<LoginResponse>() {
             @Override
-            public void onResponse(Call<List<LoginResponse>> call, Response<List<LoginResponse>> response) {
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if(!response.isSuccessful()){
-                    //TODO: response tidak sukses
-                    isLogin = false;
+                    Toast.makeText(getApplicationContext(), "Error: "+response.code(), Toast.LENGTH_SHORT).show();
+                    return;
                 }
-                List<LoginResponse> loginResponseList = response.body();
+                Pengunjung pengunjung = (Pengunjung) response.body().getData();
 
-                for(LoginResponse loginResponse : loginResponseList){
-                    isLogin = loginResponse.isStatus_akun();
-                }
+                startNext(emailString, passwordString, pengunjung.getNamaPengunjung());
             }
 
             @Override
-            public void onFailure(Call<List<LoginResponse>> call, Throwable t) {
-                isLogin = false;
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Error: "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                return;
             }
         });
-
-        if (isLogin){
-            Toast.makeText(getApplicationContext(), "Berhasil login", Toast.LENGTH_SHORT).show();
-
-        }else {
-            Toast toast = Toast.makeText(getApplicationContext(), "Terjadi kesalahan", Toast.LENGTH_SHORT);
-            toast.show();
-        }
-
-
-    }
-
-    private Retrofit getInstance(String baseURL){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseURL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        return retrofit;
     }
 
 }

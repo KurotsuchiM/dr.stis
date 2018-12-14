@@ -23,7 +23,7 @@ class Reservasi extends CI_Model
 		
 		if(array_key_exists("conditions", $params)) {
 			foreach ($params['conditions'] as $key => $value) {
-				print_r($params['conditions']);
+				////print_r($params['conditions']);
 				$this->db->where($key,$value);
 			}
 		}
@@ -80,16 +80,16 @@ class Reservasi extends CI_Model
 		
 		if(array_key_exists("conditions", $params)) {
 			foreach ($params['conditions'] as $key => $value) {
-				print_r($params['conditions']);
+				////print_r($params['conditions']);
 				$this->db->where($key,$value);
 			}
 		}
-		print_r($params);
+		////print_r($params);
 
 		if(array_key_exists("reservasi_nim", $params)) {
 			$this->db->where('p.reservasi_nim',$params['reservasi_nim']);
 			$query = $this->db->get();
-			print_r($query);
+			////print_r($query);
 			$result = $query->result_array();
 		}else{
 			if(array_key_exists("start", $params)&&array_key_exists("limit", $params)) {

@@ -173,7 +173,7 @@ class Autentikasi extends REST_Controller
 		}else{
 			$this->response("Setidaknya da satu user diupdate!", REST_Controller::HTTP_BAD_REQUEST);
 		}
-		print_r("expression");
+		//print_r("expression");
 	}
 }
  ?>

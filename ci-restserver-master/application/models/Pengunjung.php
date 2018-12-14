@@ -23,7 +23,7 @@ class Pengunjung extends CI_Model
 		
 		if(array_key_exists("conditions", $params)) {
 			foreach ($params['conditions'] as $key => $value) {
-				//print_r($params['conditions']);
+				////print_r($params['conditions']);
 				$this->db->where($key,$value);
 			}
 		}
@@ -54,8 +54,8 @@ class Pengunjung extends CI_Model
 
 	public function insertPengunjung($data) {
 		$insert = $this->db->insert($this->tabelPengunjung, $data);
-		//print_r($data);
-		//print_r($this->tabelPengunjung);
+		////print_r($data);
+		////print_r($this->tabelPengunjung);
 		if(empty($insert)) {
 			return false;
 		}else{

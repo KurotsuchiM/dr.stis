@@ -25,7 +25,7 @@ class Reservasi_buat extends REST_Controller
 		/*
 		* Jika ternyata header tidak terdapat Authorization
 		*/
-		//print_r($token);
+		////print_r($token);
 		if(empty($token)) {
 			$this->response(null, REST_Controller::HTTP_UNAUTHORIZED);
 			die();
@@ -34,7 +34,7 @@ class Reservasi_buat extends REST_Controller
 	}
 
 	public function reservasi_get($reservasi_nim = '') {
-		//print_r($reservasi_nim);
+		////print_r($reservasi_nim);
 		$con = $reservasi_nim?array('pengunjung_nim' => $reservasi_nim):'';
 		$reservasi = $this->reservasi->get_detail_reservasi($con);
 
@@ -49,7 +49,7 @@ class Reservasi_buat extends REST_Controller
 		}
 
 	public function daftar_post($reservasi_nim = '') {
-		//print_r($reservasi_nim);
+		////print_r($reservasi_nim);
 
 		$pengunjung = $this->reservasi_get($reservasi_nim);
 
@@ -77,29 +77,32 @@ class Reservasi_buat extends REST_Controller
 					'reservasi_jam' => $reservasi_jam,
 					'keluhan' => $keluhan
 				);
-				//print_r($reservasi);
-
+				////print_r($reservasi);
+				if(!empty($reservasi_tanggal) && !empty($reservasi_jam) && !empty($keluhan)){
 				$this->response([
 					'data' => $pemohon['pengunjung_nama']
 				], REST_Controller::HTTP_OK);
 
 				$insert = $this->reservasi->insert($reservasi);
-				//print_r($insert);
+				////print_r($insert);
 				if($insert) {
 					$this->response([
 						'pesan' =>'Data berhasil dikirm!',
 						'data' => $insert
 					], REST_Controller::HTTP_OK);
+
 				}else{
 					$this->response("Terdapat masalah, silakan ulangi proses!", REST_Controller::HTTP_BAD_REQUEST);
 				}
-			}
+			}else{
+					$this->response("Data belum lengkap!",REST_Controller::HTTP_BAD_REQUEST);
+				}
 		}else{
 			$this->response("Belum mulai apa-apa!",REST_Controller::HTTP_BAD_REQUEST);
 		}
 
 	}
 
-
+	}
 	}
  ?>

@@ -15,7 +15,7 @@
             android:layout_gravity="center_horizontal"
             android:textAllCaps="true"
             android:background="@drawable/button_submit"
-            android:textSize="24dp"
+            android:textSize="30dp"
             />
         <TextView
             android:id="@+id/jadwal_status"
@@ -24,7 +24,7 @@
             android:layout_gravity="center_horizontal"
             android:textAllCaps="true"
             android:background="@drawable/button_submit"
-            android:textSize="24dp"
+            android:textSize="30dp"
             />
 
     </LinearLayout>

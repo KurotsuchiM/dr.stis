@@ -56,6 +56,8 @@ public class activity_jadwal extends AppCompatActivity implements ActivityJadwal
         listWaktu[13] = "15:30";
         listWaktu[14] = "16:00";
 
+        //TODO: Buat per Jam individual supaya tiap Jam bisa di set manual background nya ke Merah/Hijau
+
 
         RecyclerView listView = (RecyclerView) findViewById(R.id.jadwal_list_itself);
         listView.setLayoutManager(new GridLayoutManager(this, 3));

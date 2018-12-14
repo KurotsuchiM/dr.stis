@@ -24,6 +24,7 @@ public class CalendarActivity extends AppCompatActivity {
     private final String[] listDay = {"Senin","Selasa","Rabu","Kamis","Jumat","Sabtu","Minggu"};
     private final String[] listMonths = {"Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"};
 
+
     private Button select;
     private TextView selectText;
     private String selectedDay;
@@ -31,6 +32,7 @@ public class CalendarActivity extends AppCompatActivity {
     private String selectedMonth;
     private String selectedYear;
     private String selectedFullDate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -53,7 +55,7 @@ public class CalendarActivity extends AppCompatActivity {
                     setSelectedMonth(Integer.valueOf(month).toString());
                     setSelectedYear(Integer.valueOf(year).toString());
 
-                    setSelectedFullDate("pesan untuk " + toDay(dayofMonth,month,year) + ", " + getSelectedDate() + " " + toMonth(month) + " " + getSelectedYear());
+                    setSelectedFullDate(toDay(dayofMonth,month,year) + ", " + getSelectedDate() + " " + toMonth(month) + " " + getSelectedYear());
                     selectText.setText(getSelectedFullDate());
 
                 }
@@ -68,12 +70,18 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(CalendarActivity.this,activity_jadwal.class);
-                intent.putExtra("Tanggal", getSelectedFullDate());
-                startActivity(intent);
+                pesanTanggal(selectText.getText().toString());
             }
         });
     }
+
+    public void pesanTanggal(String pesan)
+    {
+        Intent intent = new Intent(this, activity_jadwal.class);
+        intent.putExtra("Tanggal", pesan);
+        startActivity(intent);
+    }
+
 
     public String toDay(int date, int month, int year)
     {

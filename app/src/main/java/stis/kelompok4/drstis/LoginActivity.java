@@ -170,23 +170,32 @@ public class LoginActivity extends AppCompatActivity {
                 .getRetrofitAdapter("https://dr-polstat.000webhostapp.com/index.php/api/");
         LoginApi loginApi = retrofit.create(LoginApi.class);
 
-        Call<LoginResponse> call = loginApi.createLogin("coba", emailString, passwordString);
+        Call<LoginResponse> call = loginApi.createLogin(emailString, passwordString);
 
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if(!response.isSuccessful()){
-                    Toast.makeText(getApplicationContext(), "Error: "+response.code(), Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(getApplicationContext(), "Error disini: "+response.code(), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Pengunjung pengunjung = response.body().getData();
+                String apiResponse = "";
+                apiResponse += pengunjung.getNamaPengunjung()+"/n";
+                apiResponse += pengunjung.getPassword()+"/n";
+                apiResponse += pengunjung.getNimPengunjung()+"/n";
+                apiResponse += pengunjung.getStatus()+"/n";
+
+                Toast.makeText(getApplicationContext(), apiResponse, Toast.LENGTH_SHORT).show();
+
 
                 startNext(emailString, passwordString, pengunjung.getNamaPengunjung());
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Error: "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Error disutu: "+t.getMessage(), Toast.LENGTH_SHORT).show();
                 return;
             }
         });

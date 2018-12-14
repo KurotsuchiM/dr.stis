@@ -53,8 +53,8 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startNext("alfiyan@stis.ac.id","sayalupa","alfian");
-//                makeLogin();
+//                startNext("alfiyan@stis.ac.id","sayalupa","alfian");
+                makeLogin();
             }
         });
 
@@ -167,10 +167,10 @@ public class LoginActivity extends AppCompatActivity {
 
         //TODO: Bikin retofit login ke webservice login
         Retrofit retrofit = RetrofitAdapter.getInstance()
-                .getRetrofitAdapter("https://localhost/ci-restserver-master/api/autentikasi/");
+                .getRetrofitAdapter("https://dr-polstat.000webhostapp.com/index.php/api/");
         LoginApi loginApi = retrofit.create(LoginApi.class);
 
-        Call<LoginResponse> call = loginApi.createLogin("alfian@stis.ac.id", "somepass");
+        Call<LoginResponse> call = loginApi.createLogin(emailString, passwordString);
 
         call.enqueue(new Callback<LoginResponse>() {
             @Override

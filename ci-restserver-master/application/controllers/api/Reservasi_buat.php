@@ -15,21 +15,6 @@ class Reservasi_buat extends REST_Controller
 		parent::__construct();
 		$this->load->model('reservasi');
 		$this->load->model('pengunjung');
-		$this->load->library('JWT/Auth');
-
-		/*
-		* Cek apakah header terdapat Authorization
-		*/
-		$token = $this->input->get_request_header('X-API-KEY');
-
-		/*
-		* Jika ternyata header tidak terdapat Authorization
-		*/
-		////print_r($token);
-		if(empty($token)) {
-			$this->response(null, REST_Controller::HTTP_UNAUTHORIZED);
-			die();
-		}
 
 	}
 

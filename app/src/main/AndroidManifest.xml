@@ -24,7 +24,7 @@
         <activity android:name=".ReservasiActivity" android:screenOrientation="portrait" />
         <activity android:name=".CalendarActivity" android:screenOrientation="portrait" android:exported="true"></activity>
         <activity android:name=".activity_jadwal" android:screenOrientation="portrait" android:exported="true"></activity>
-        <activity android:name=".SignupActivity" android:screenOrientation="portrait" />
+        <activity android:name=".SignupActivity" android:screenOrientation="portrait" android:exported="true" />
         <activity android:name=".BerandaActivity" android:screenOrientation="portrait" />
         <activity android:name=".CekJadwalActivity" android:screenOrientation="portrait">
 

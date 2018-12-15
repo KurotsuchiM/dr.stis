@@ -109,14 +109,14 @@ public class activity_jadwal extends AppCompatActivity
         setAvailableAt0900(true);
         setAvailableAt0930(true);
         setAvailableAt1000(true);
-        setAvailableAt1030(false);
+        setAvailableAt1030(true);
         setAvailableAt1100(true);
         setAvailableAt1130(true);
         setAvailableAt1200(true);
-        setAvailableAt1300(false);
+        setAvailableAt1300(true);
         setAvailableAt1330(true);
         setAvailableAt1400(true);
-        setAvailableAt1430(false);
+        setAvailableAt1430(true);
         setAvailableAt1500(true);
         setAvailableAt1530(true);
         setAvailableAt1600(true);
@@ -434,7 +434,87 @@ public class activity_jadwal extends AppCompatActivity
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void checkAvailability()
     {
+        ArrayList<String> listJam = new ArrayList<>();
+        String tanggal[] = getSelectedDate().split("-");
+        String tanggalReversed = tanggal[2] + tanggal[1] + tanggal[0];
         //int id = getResources().getIdentifier("")
+        try
+        {
+
+            // Filter semua tanggal di server dengan tanggal yang dipilih
+            for(JadwalResponse jadwal: listJadwal)
+            {
+                if(jadwal.getReservasiTanggal().equalsIgnoreCase(tanggalReversed))
+                {
+                    listJam.add(jadwal.getReservasiJam());
+                }
+            }
+            // Filter jam yang di server dengan tanggal yang dipilih
+            for(String x:listJam)
+            {
+                if(x.equalsIgnoreCase("09:00:00"))
+                {
+                    setAvailableAt0900(false);
+                }
+                else if(x.equalsIgnoreCase("09:30:00"))
+                {
+                    setAvailableAt0930(false);
+                }
+                else if(x.equalsIgnoreCase("10:00:00"))
+                {
+                    setAvailableAt1000(false);
+                }
+                else if(x.equalsIgnoreCase("10:30:00"))
+                {
+                    setAvailableAt1030(false);
+                }
+                else if(x.equalsIgnoreCase("11:00:00"))
+                {
+                    setAvailableAt1100(false);
+                }
+                else if(x.equalsIgnoreCase("11:30:00"))
+                {
+                    setAvailableAt1130(false);
+                }
+                else if(x.equalsIgnoreCase("12:00:00"))
+                {
+                    setAvailableAt1200(false);
+                }
+                else if(x.equalsIgnoreCase("13:00:00"))
+                {
+                    setAvailableAt1300(false);
+                }
+                else if(x.equalsIgnoreCase("13:30:00"))
+                {
+                    setAvailableAt1330(false);
+                }
+                else if(x.equalsIgnoreCase("14:00:00"))
+                {
+                    setAvailableAt1400(false);
+                }
+                else if(x.equalsIgnoreCase("14:30:00"))
+                {
+                    setAvailableAt1430(false);
+                }
+                else if(x.equalsIgnoreCase("15:00:00"))
+                {
+                    setAvailableAt1500(false);
+                }
+                else if(x.equalsIgnoreCase("15:30:00"))
+                {
+                    setAvailableAt1530(false);
+                }
+                else if(x.equalsIgnoreCase("16:00:00"))
+                {
+                    setAvailableAt1600(false);
+                }
+            }
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
         if(isAvailableAt0900())
         {
             jam0900.setBackground(getResources().getDrawable(R.drawable.button_submit));

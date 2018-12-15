@@ -25,21 +25,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-<<<<<<< HEAD
         android:textColor="@color/colorPrimary"
         android:layout_marginTop="44dp"
         android:layout_marginEnd="13dp"
         android:text="Log out"
         />
-=======
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="37dp"
-        android:layout_marginEnd="12dp"
-        android:text="Log out"
-        android:textColor="@color/colorLogOut" />
->>>>>>> fcab9faa9d0f8257929dba5800af83ba55855e05
-
-    <LinearLayout
+ <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"

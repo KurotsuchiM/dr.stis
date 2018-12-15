@@ -90,7 +90,7 @@ public class activity_jadwal extends AppCompatActivity implements ActivityJadwal
 
         // sharedPrefs mode
 
-        // setSelectedDate(sharedPreferences.getString(CalendarActivity.TEXT_TANGGAL, ""));
+        //setSelectedDate(sharedPreferences.getString(CalendarActivity.TEXT_TANGGAL, ""));
 
         selectedDateText.setText(getSelectedDate());
 

@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context=".BerandaActivity"
     android:background="@drawable/stis"
+    android:alpha="0.9"
     >
 
     <TextView
@@ -45,7 +46,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Dr. Polstat"
             android:textColor="@color/colorAccent"
             android:textColorLink="@color/colorPrimary"
             android:textSize="30sp" />

@@ -25,6 +25,8 @@ public class FormulirActivity extends AppCompatActivity {
 
     private String selectedDate;
     private String selectedTIme;
+    private String selectedName;
+    private TextView namaInput;
     private TextView tanggalInput;
     private TextView jamInput;
 
@@ -48,7 +50,15 @@ public class FormulirActivity extends AppCompatActivity {
 
             if(getSelectedTIme().equalsIgnoreCase("") || (getSelectedTIme() == null))
             {
+                setSelectedTIme("Jam Belum Dipilih");
+            }
+            if(getSelectedDate().equalsIgnoreCase("") || (getSelectedDate() == null))
+            {
                 setSelectedTIme("Tanggal Belum Diisi");
+            }
+            if(getSelectedName().equalsIgnoreCase("") || (getSelectedName() == null))
+            {
+                setSelectedTIme("Login Belum Dilakukan");
             }
 
             tanggalInput = (TextView) findViewById(R.id.tanggal_input);
@@ -131,5 +141,13 @@ public class FormulirActivity extends AppCompatActivity {
 
     public void setSelectedTIme(String selectedTIme) {
         this.selectedTIme = selectedTIme;
+    }
+
+    public String getSelectedName() {
+        return selectedName;
+    }
+
+    public void setSelectedName(String selectedName) {
+        this.selectedName = selectedName;
     }
 }

@@ -5,30 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".BerandaActivity">
+    tools:context=".BerandaActivity"
+    android:background="@drawable/stis"
+    >
 
     <TextView
         android:id="@+id/nama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="13dp"
-        android:layout_marginTop="13dp" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="13dp" />
 
-    
+
     <TextView
         android:id="@+id/logoutTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
+        android:textColor="@color/colorPrimary"
         android:layout_marginTop="44dp"
         android:text="Log out" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -37,7 +42,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Dr. STIS"
+            android:text="Dr. Polstat"
+            android:textColor="@color/colorAccent"
+            android:textColorLink="@color/colorPrimary"
             android:textSize="30sp" />
 
         <Button
@@ -45,7 +52,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:width="120dp"
-            android:text="Login" />
+            android:text="Login"
+            android:textColorHighlight="@color/colorAccent" />
 
         <Button
             android:id="@+id/cekJadwalButton"
@@ -53,7 +61,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:width="120dp"
-            android:text="Cek Jadwal" />
+            android:text="Cek Jadwal"
+            android:textColorHighlight="@color/colorAccent" />
 
 
         <Button
@@ -61,7 +70,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:width="120dp"
-            android:text="Reservasi" />
+            android:text="Reservasi"
+            android:textColorHighlight="@color/colorAccent" />
 
     </LinearLayout>
 

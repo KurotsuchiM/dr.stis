@@ -7,6 +7,10 @@
 * [Instalasi](https://github.com/KurotsuchiM/dr.stis#instalasi)
 * [Cara Penggunaan](https://github.com/KurotsuchiM/dr.stis#cara-penggunaan)
 * [Untuk Pengembang](https://github.com/KurotsuchiM/dr.stis#untuk-pengembang)
+* Untuk lebih jelasnya dapat membuka Halaman Wiki berikut ini :
+  * [Pendahuluan](https://github.com/KurotsuchiM/dr.stis/wiki/Pendahuluan)
+
+
 
 ## Requirement
 Disini ada 3 komponen penting dengan _system requirement_ berbeda:

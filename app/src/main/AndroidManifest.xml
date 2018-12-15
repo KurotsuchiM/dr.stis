@@ -18,15 +18,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".FormulirActivity" android:exported="true"/>
-        <activity android:name=".DisplayMessageActivity" />
-        <activity android:name=".ReservasiActivity" />
-        <activity android:name=".CalendarActivity" android:exported="true"></activity>
-        <activity android:name=".activity_jadwal" android:exported="true"></activity>
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".BerandaActivity" />
-        <activity android:name=".CekJadwalActivity"></activity>
+        <activity android:name=".LoginActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".FormulirActivity" android:screenOrientation="portrait" android:exported="true"/>
+        <activity android:name=".DisplayMessageActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ReservasiActivity" android:screenOrientation="portrait" />
+        <activity android:name=".CalendarActivity" android:screenOrientation="portrait" android:exported="true"></activity>
+        <activity android:name=".activity_jadwal" android:screenOrientation="portrait" android:exported="true"></activity>
+        <activity android:name=".SignupActivity" android:screenOrientation="portrait" />
+        <activity android:name=".BerandaActivity" android:screenOrientation="portrait" />
+        <activity android:name=".CekJadwalActivity" android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>

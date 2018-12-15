@@ -2,5 +2,6 @@
 <resources>
     <color name="colorPrimary">#57456A</color>
     <color name="colorPrimaryDark">#114a26</color>
+    <color name="colorLogOut">#f40c10</color>
     <color name="colorAccent">#0af706</color>
 </resources>

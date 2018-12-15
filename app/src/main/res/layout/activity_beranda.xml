@@ -56,12 +56,21 @@
             android:textColorHighlight="@color/colorAccent" />
 
         <Button
+            android:id="@+id/signUpButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:width="120dp"
+            android:text="sign up"
+            android:textColorHighlight="@color/colorAccent" />
+
+        <Button
             android:id="@+id/cekJadwalButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:width="120dp"
-            android:text="Cek Jadwal"
+            android:text="cek jadwal"
             android:textColorHighlight="@color/colorAccent" />
 
 

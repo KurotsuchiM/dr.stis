@@ -1,5 +1,6 @@
 package stis.kelompok4.drstis;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +12,7 @@ public class BerandaActivity extends AppCompatActivity {
 
     Boolean isLogin = false;
     TextView logoutTextView;
-    Button cekJadwalButton, loginButton, reservasiButton;
+    Button cekJadwalButton, loginButton, reservasiButton, signUpButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +34,7 @@ public class BerandaActivity extends AppCompatActivity {
 
         }
 
+        signUpButton = (Button) findViewById(R.id.signUpButton);
         cekJadwalButton = (Button) findViewById(R.id.cekJadwalButton);
         loginButton = (Button) findViewById(R.id.loginButton);
         reservasiButton = (Button) findViewById(R.id.reservasiButton);
@@ -41,12 +43,16 @@ public class BerandaActivity extends AppCompatActivity {
 
         if(isLogin){
             loginButton.setVisibility(View.GONE);
+            signUpButton.setVisibility(View.GONE);
             logoutTextView.setVisibility(View.VISIBLE);
+            cekJadwalButton.setVisibility(View.VISIBLE);
             reservasiButton.setVisibility(View.VISIBLE);
 
         }else{
             loginButton.setVisibility(View.VISIBLE);
+            signUpButton.setVisibility(View.VISIBLE);
             logoutTextView.setVisibility(View.GONE);
+            cekJadwalButton.setVisibility(View.GONE);
             reservasiButton.setVisibility(View.GONE);
         }
 
@@ -81,6 +87,15 @@ public class BerandaActivity extends AppCompatActivity {
                 BerandaActivity.this.startActivity(intent);
             }
         });
+
+        signUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BerandaActivity.this, SignupActivity.class);
+                BerandaActivity.this.startActivity(intent);
+            }
+        });
+
 
     }
 }

@@ -8,8 +8,9 @@ import retrofit2.http.Path;
 
 public interface FormulirApi {
     @FormUrlEncoded
-    @POST("Reservasi_buat/reservasi/{reservasi_nim}")
+    @POST("Reservasi_buat/daftar/{reservasi_nim}")
     Call<FormulirResponse> sendFormulir(
+            @Path("reservasi_nim") String reservasiNim,
             @Field("reservasi_tanggal") String tanggalReservasi,
             @Field("reservasi_jam") String jamReservasi,
             @Field("keluhan") String keluhan

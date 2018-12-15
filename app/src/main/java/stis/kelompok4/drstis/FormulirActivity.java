@@ -35,11 +35,13 @@ public class FormulirActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+    private String reservasiNim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulir);
+        loadData();
 
         init();
 
@@ -114,11 +116,11 @@ public class FormulirActivity extends AppCompatActivity {
                 .getRetrofitAdapter("https://dr-polstat.000webhostapp.com/index.php/api/");
         FormulirApi formulirApi = retrofit.create(FormulirApi.class);
 
-        String tanggalReservasi = "";
-        String jamReservasi = "";
+//        String tanggalReservasi = "";
+//        String jamReservasi = "";
         String keluhan = mEditText.getText().toString();
 
-        Call<FormulirResponse> call = formulirApi.sendFormulir(tanggalReservasi, jamReservasi, keluhan);
+        Call<FormulirResponse> call = formulirApi.sendFormulir(reservasiNim, selectedDate, selectedTIme, keluhan);
         call.enqueue(new Callback<FormulirResponse>() {
             @Override
             public void onResponse(Call<FormulirResponse> call, Response<FormulirResponse> response) {
@@ -134,7 +136,7 @@ public class FormulirActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<FormulirResponse> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Error di onFailure: "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Failure: "+t.getMessage(), Toast.LENGTH_SHORT).show();
                 return;
             }
         });
@@ -164,5 +166,10 @@ public class FormulirActivity extends AppCompatActivity {
 
     public void setSelectedName(String selectedName) {
         this.selectedName = selectedName;
+    }
+
+    private void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.SHARED_PREFS, MODE_PRIVATE);
+        this.reservasiNim = sharedPreferences.getString(LoginActivity.TEXT_NIM, "");
     }
 }

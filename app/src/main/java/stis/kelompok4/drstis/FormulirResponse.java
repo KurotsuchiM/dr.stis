@@ -1,39 +1,31 @@
 package stis.kelompok4.drstis;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class FormulirResponse {
-    private String nimPengguna;
-    private String namaPengguna;
-    private String nipDokter;
-    private String namaDokter;
-    private String tanggalReservasi;
-    private String jamReservasi;
-    private String keluhan;
 
-    public String getNimPengguna() {
-        return nimPengguna;
+    @SerializedName("pesan")
+    @Expose
+    private String pesan;
+
+    @SerializedName("data")
+    @Expose
+    private Boolean data;
+
+    public String getPesan() {
+        return pesan;
     }
 
-    public String getNamaPengguna() {
-        return namaPengguna;
+    public void setPesan(String pesan) {
+        this.pesan = pesan;
     }
 
-    public String getNipDokter() {
-        return nipDokter;
+    public Boolean getData() {
+        return data;
     }
 
-    public String getNamaDokter() {
-        return namaDokter;
-    }
-
-    public String getTanggalReservasi() {
-        return tanggalReservasi;
-    }
-
-    public String getJamReservasi() {
-        return jamReservasi;
-    }
-
-    public String getKeluhan() {
-        return keluhan;
+    public void setData(Boolean data) {
+        this.data = data;
     }
 }

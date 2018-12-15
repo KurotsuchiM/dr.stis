@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="detail"
+        android:text="Detail"
         android:textStyle="bold" />
 
     <TableLayout
@@ -21,10 +21,10 @@
 
             <TextView
                 android:layout_marginRight="8dp"
-                android:text="@string/statusText" />
+                android:text="@string/namaText" />
 
             <TextView
-                android:id="@+id/status_disetujui"
+                android:id="@+id/nama_pengunjung"
                 android:text="@string/disetujuiDefault" />
         </TableRow>
 

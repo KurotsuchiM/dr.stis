@@ -1,8 +1,8 @@
 package stis.kelompok4.drstis;
 
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
@@ -19,12 +19,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class ReservasiActivity extends AppCompatActivity {
+public class ReservasiActivityCopy1 extends AppCompatActivity {
     private ExpandableListView expandableListView;
     private ExpandableListAdapter expandableListAdapter;
     private List<String> expandableListIndex;
-    private HashMap<String, Reservasi> listReservasi = new HashMap<>();
+    private HashMap<String, Reservasi> listReservasi;
     private int lastExpandedPosition = -1;
+    private String nimPengunjung ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +42,11 @@ public class ReservasiActivity extends AppCompatActivity {
                     expandableListView.collapseGroup(lastExpandedPosition);
                 }
                 lastExpandedPosition = groupPosition;
+
             }
         });
 
-
-        ambilDataReservasi();
-
+        loadData();
     }
 
     /**
@@ -65,59 +65,53 @@ public class ReservasiActivity extends AppCompatActivity {
      */
     private HashMap<String, Reservasi> getReservasi() {
 
-        HashMap<String, Reservasi> listHash = new HashMap<>();
-
-        Reservasi obj1 = new Reservasi("Alfian", "16.8990", "198129187298172", "dr. Sehat Utami", "2018-12-14", "09.00", "Sakit kepala");
-        Reservasi obj2 = new Reservasi("Alfian", "16.8990", "198129187298172", "dr. Sehat Utami", "2018-12-14", "09.00", "Sakit kepala");
-        Reservasi obj3 = new Reservasi("Alfian", "16.8990", "198129187298172", "dr. Sehat Utami", "2018-12-14", "09.00", "Sakit kepala");
-
-        listHash.put(obj1.hashCode()+"", obj1);
-        listHash.put(obj2.hashCode()+"", obj2);
-        listHash.put(obj3.hashCode()+"", obj3);
-
-        return listHash;
-    }
-
-    private void ambilDataReservasi(){
         Retrofit retrofit = RetrofitAdapter.getInstance()
                 .getRetrofitAdapter("https://dr-polstat.000webhostapp.com/index.php/api/");
         ReservasiApi reservasiApi = retrofit.create(ReservasiApi.class);
-
-        final List<Reservasi> mReservasiList = new ArrayList<>();
 
         Call<List<Reservasi>> call = reservasiApi.getReservasi("16.9395");
         call.enqueue(new Callback<List<Reservasi>>() {
             @Override
             public void onResponse(Call<List<Reservasi>> call, Response<List<Reservasi>> response) {
+                HashMap<String, Reservasi> lReservasi = new HashMap<>();
+                Gson gson = new Gson();
+                String debugHere = gson.toJson(response.body());
+                Log.d("ANDRO2_DOKTER", debugHere);
                 if (!response.isSuccessful()){
-                    Toast.makeText(ReservasiActivity.this.getApplicationContext(), "Code: "+response.code(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Error disini: "+response.code(), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Toast.makeText(ReservasiActivity.this.getApplicationContext(), "Bisa", Toast.LENGTH_SHORT).show();
-
-                List<Reservasi> reservasiList = response.body();
-                for (Reservasi rese : reservasiList){
-                    Log.d("LOG_doc_nama", rese.getDokterNama());
-                    Log.d("LOG_doc_nip", rese.getDokterNip());
-                    Log.d("LOG_doc_keluhan", rese.getKeluhan());
-                    Log.d("LOG_doc_nama_pengunjung", rese.getPengunjungNama());
-                    Log.d("LOG_doc_nim_pengunjung", rese.getPengunjungNim());
+                List<Reservasi> list = response.body();
+                for (Reservasi item : list){
+                    lReservasi.put(item.hashCode()+"", item);
                 }
-//                mReservasiList.addAll(reservasiList);
-
-
             }
 
             @Override
             public void onFailure(Call<List<Reservasi>> call, Throwable t) {
-                Toast.makeText(ReservasiActivity.this.getApplicationContext(), "Error: "+t.getMessage(), Toast.LENGTH_SHORT);
+
+                Log.d("ANDRO1_DOKTER", t.getMessage());
+                t.printStackTrace();
+
+                Toast.makeText(getApplicationContext(), "Error disitu: "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                return;
             }
         });
 
-        for (Reservasi rese : mReservasiList){
-            Log.d("LOG_NAMA", rese.getPengunjungNama());
-        }
+        /**
+         * ini cuma contoh buat listnya
+         * i: adalah jumlah barisnya mau berapa banya
+         */
+//        for (int i = 1; i < 15; i++) {
+//            listReservasi.put(i + "", new Reservasi("selesai", "disetujui", "2 Desember 2018", "09.00-09.30", "Sakit kepala", "dr. Sehat Utami"));
+//        }
 
+        HashMap<String, Reservasi> lReservasi = new HashMap<>();
+        return lReservasi;
     }
 
+    private void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.SHARED_PREFS, MODE_PRIVATE);
+        this.nimPengunjung = sharedPreferences.getString(LoginActivity.TEXT_NIM, "");
+    }
 }

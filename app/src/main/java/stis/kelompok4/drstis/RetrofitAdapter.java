@@ -37,6 +37,7 @@ public class RetrofitAdapter {
     public Retrofit getRetrofitAdapter(String baseURL){
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")
+                .setLenient()
                 .create();
 
         Retrofit retrofit = new Retrofit.Builder()

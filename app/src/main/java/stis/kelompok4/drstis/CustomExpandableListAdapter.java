@@ -74,10 +74,10 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         }
 
         TextView tanggalTextView = convertView.findViewById(R.id.tanggal_text_view);
-        TextView statusSelesai = convertView.findViewById(R.id.status_selesai);
+//        TextView statusSelesai = convertView.findViewById(R.id.status_selesai);
 
-        tanggalTextView.setText(reservasi.getTanggal());
-        statusSelesai.setText(reservasi.getStatusSelesai());
+        tanggalTextView.setText(reservasi.getReservasiTanggal());
+//        statusSelesai.setText(reservasi.getSele());
 
         return convertView;
     }
@@ -93,15 +93,15 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.list_item, null);
         }
 
-        TextView statusDisetujui = convertView.findViewById(R.id.status_disetujui);
+        TextView namaPengunjung = convertView.findViewById(R.id.nama_pengunjung);
         TextView jam = convertView.findViewById(R.id.jam_input);
         TextView keluhan = convertView.findViewById(R.id.keluhan_input);
         TextView dokterName = convertView.findViewById(R.id.dokter_name);
 
-        statusDisetujui.setText(reservasi.getStatusDisetujui());
-        jam.setText(reservasi.getJam());
+        namaPengunjung.setText(reservasi.getPengunjungNama());
+        jam.setText(reservasi.getReservasiJam());
         keluhan.setText(reservasi.getKeluhan());
-        dokterName.setText(reservasi.getDokterName());
+        dokterName.setText(reservasi.getDokterNama());
 
         Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
         convertView.startAnimation(animation);

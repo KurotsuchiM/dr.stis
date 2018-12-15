@@ -1,6 +1,7 @@
 package stis.kelompok4.drstis;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -20,9 +21,11 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
-    public static final String TEXT_EMAIL = "";
-    public static final String TEXT_PASSWORD = "";
-    public static final String TEXT_NAMA = "";
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String TEXT_EMAIL = "emailText";
+    public static final String TEXT_PASSWORD = "passwordText";
+    public static final String TEXT_NAMA = "namaText";
+    public static final String TEXT_NIM = "nimText";
 
     public static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
@@ -38,15 +41,13 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout emailInput;
     private TextInputLayout passwordInput;
     private Button loginButton;
-    private String emailString, passwordString;
+    private String emailString, passwordString, namaPengunjung, nimPengunjung;
     private TextView daftarButton;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
 
         init();
 
@@ -64,6 +65,11 @@ public class LoginActivity extends AppCompatActivity {
                 goToDaftar();
             }
         });
+
+        loadData();
+        if (namaPengunjung != ""){
+            startNext(emailString, passwordString, namaPengunjung);
+        }
 
     }
 
@@ -101,8 +107,6 @@ public class LoginActivity extends AppCompatActivity {
         bundle.putBoolean("data4",true);
         Intent intent = new Intent(LoginActivity.this, BerandaActivity.class);
         intent.putExtras(bundle);
-//        intent.putExtra(TEXT_PASSWORD, password);
-//        intent.putExtra(TEXT_NAMA, nama);
         startActivity(intent);
     }
 
@@ -176,21 +180,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if(!response.isSuccessful()){
-
                     Toast.makeText(getApplicationContext(), "Error disini: "+response.code(), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Pengunjung pengunjung = response.body().getData();
-                String apiResponse = "";
-                apiResponse += pengunjung.getNamaPengunjung()+"/n";
-                apiResponse += pengunjung.getPassword()+"/n";
-                apiResponse += pengunjung.getNimPengunjung()+"/n";
-                apiResponse += pengunjung.getStatus()+"/n";
+                namaPengunjung = pengunjung.getNamaPengunjung();
+                nimPengunjung = pengunjung.getNimPengunjung();
 
-                Toast.makeText(getApplicationContext(), apiResponse, Toast.LENGTH_SHORT).show();
-
-
-                startNext(emailString, passwordString, pengunjung.getNamaPengunjung());
+                saveData();
+                startNext(emailString, passwordString, namaPengunjung);
             }
 
             @Override
@@ -199,6 +197,28 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
         });
+    }
+
+    private void saveData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(TEXT_EMAIL, emailString);
+        editor.putString(TEXT_PASSWORD, passwordString);
+        editor.putString(TEXT_NAMA, namaPengunjung);
+        editor.putString(TEXT_NIM, nimPengunjung);
+
+        editor.apply();
+
+        Toast.makeText(getApplicationContext(), nimPengunjung, Toast.LENGTH_SHORT).show();
+    }
+
+    private void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        emailString = sharedPreferences.getString(TEXT_EMAIL, "");
+        passwordString = sharedPreferences.getString(TEXT_PASSWORD, "");
+        namaPengunjung = sharedPreferences.getString(TEXT_NAMA, "");
+        nimPengunjung = sharedPreferences.getString(TEXT_NIM, "");
     }
 
 }

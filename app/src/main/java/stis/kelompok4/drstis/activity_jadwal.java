@@ -1,11 +1,13 @@
 package stis.kelompok4.drstis;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ import static java.lang.Boolean.FALSE;
 
 public class activity_jadwal extends AppCompatActivity implements ActivityJadwalAdapter.ItemClickListener
 {
+    public static final String TEXT_JAM = "sharedJam";
 
     private boolean selectedTimeStatusAvailable = false;
     private String selectedDate;
@@ -27,12 +30,23 @@ public class activity_jadwal extends AppCompatActivity implements ActivityJadwal
     private ActivityJadwalAdapter adapter;
     private String selectedTime;
 
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jadwal);
 
+
+        init();
+    }
+
+    public void init()
+    {
+        sharedPreferences = getSharedPreferences(LoginActivity.SHARED_PREFS, MODE_PRIVATE);
+        editor = sharedPreferences.edit();
         selectedDateText = (TextView) findViewById(R.id.selectedDate) ;
         final Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -70,9 +84,15 @@ public class activity_jadwal extends AppCompatActivity implements ActivityJadwal
 
         if(bundle != null)
         {
+            // intent mode
             setSelectedDate((String) bundle.get("Tanggal"));
-            selectedDateText.setText(getSelectedDate());
         }
+
+        // sharedPrefs mode
+
+        // setSelectedDate(sharedPreferences.getString(CalendarActivity.TEXT_TANGGAL, ""));
+
+        selectedDateText.setText(getSelectedDate());
 
         pesanJadwal.setOnClickListener(new View.OnClickListener()
         {
@@ -81,6 +101,10 @@ public class activity_jadwal extends AppCompatActivity implements ActivityJadwal
             {
                 setSelectedTime("");
 
+                // sharedPref mode
+                // editor.putString(TEXT_JAM, getSelectedTime());
+
+                // intent mode
                 Intent intent1 = new Intent(getApplicationContext(), FormulirActivity.class);
                 intent1.putExtra("Jam", getSelectedTime());
                 intent1.putExtra("Tanggal", getSelectedDate());
@@ -89,8 +113,8 @@ public class activity_jadwal extends AppCompatActivity implements ActivityJadwal
 
             }
         });
-
     }
+
 
     @Override
     public void onItemClick(View view, int position)

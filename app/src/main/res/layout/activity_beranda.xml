@@ -51,6 +51,7 @@
 
         <Button
             android:id="@+id/loginButton"
+            android:background="@drawable/button_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:width="120dp"
@@ -59,6 +60,7 @@
 
         <Button
             android:id="@+id/signUpButton"
+            android:background="@drawable/button_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -68,6 +70,7 @@
 
         <Button
             android:id="@+id/cekJadwalButton"
+            android:background="@drawable/button_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -78,6 +81,7 @@
 
         <Button
             android:id="@+id/reservasiButton"
+            android:background="@drawable/button_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:width="120dp"

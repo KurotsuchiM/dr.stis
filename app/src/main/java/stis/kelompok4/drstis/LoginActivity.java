@@ -2,13 +2,17 @@ package stis.kelompok4.drstis;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,11 +80,18 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * Dijalankan saat onCreate. Bertujuan menginisiasi semua field yang ada.
      */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void init() {
         this.emailInput = findViewById(R.id.email_Input);
         this.passwordInput = findViewById(R.id.password_Input);
         this.loginButton = findViewById(R.id.loginButton);
         this.daftarButton = findViewById(R.id.daftar_button);
+
+        Drawable drawable = getResources().getDrawable(R.drawable.button_bg);
+        drawable.setAlpha(200);
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.login_bg2);
+        linearLayout.setBackground(drawable);
+
     }
 
     /**

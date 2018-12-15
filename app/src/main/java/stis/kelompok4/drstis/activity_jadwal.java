@@ -22,6 +22,12 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 import static java.lang.Boolean.FALSE;
 
@@ -35,6 +41,8 @@ public class activity_jadwal extends AppCompatActivity
     private TextView textView;
     private ActivityJadwalAdapter adapter;
     private String selectedTime;
+
+    private List<JadwalResponse> listJadwal;
 
     private boolean availableAt0900;
     private boolean availableAt0930;
@@ -76,11 +84,11 @@ public class activity_jadwal extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jadwal);
 
+        getListJadwal();
 
-
-        init();
-        checkAvailability();
-        setListeners();
+//        init();
+//        checkAvailability();
+//        setListeners();
 
     }
 
@@ -661,6 +669,36 @@ public class activity_jadwal extends AppCompatActivity
 
     public void setAvailableAt1600(boolean availableAt1600) {
         this.availableAt1600 = availableAt1600;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    void getListJadwal(){
+        Retrofit retrofit = RetrofitAdapter.getInstance()
+                .getRetrofitAdapter("https://dr-polstat.000webhostapp.com/index.php/api/");
+        JadwalApi jadwalApi = retrofit.create(JadwalApi.class);
+
+        Call<List<JadwalResponse>> call = jadwalApi.getJadwal();
+
+        call.enqueue(new Callback<List<JadwalResponse>>() {
+            @Override
+            public void onResponse(Call<List<JadwalResponse>> call, Response<List<JadwalResponse>> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(activity_jadwal.this, "Error: "+response.code(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                listJadwal = response.body();
+
+                init();
+                checkAvailability();
+                setListeners();
+            }
+
+            @Override
+            public void onFailure(Call<List<JadwalResponse>> call, Throwable t) {
+                Toast.makeText(activity_jadwal.this, "Failure: "+t.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
 }

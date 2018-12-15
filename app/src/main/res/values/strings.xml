@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Dr STIS</string>
+    <string name="app_name">Dr Polstat</string>
     <string name="loginTxt">Login</string>
     <string name="usernameTxt">username</string>
     <string name="passwordTxt">Password</string>

@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -21,6 +23,13 @@ public class FormulirActivity extends AppCompatActivity {
     private TextView mTextView;
     private EditText mEditText;
 
+    private String selectedDate;
+    private String selectedTIme;
+    private String selectedName;
+    private TextView namaInput;
+    private TextView tanggalInput;
+    private TextView jamInput;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +39,34 @@ public class FormulirActivity extends AppCompatActivity {
 
     }
 
-    private void init(){
+    private void init()
+    {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if(bundle != null)
+        {
+            setSelectedDate((String) bundle.getString("Tanggal"));
+            setSelectedTIme((String) bundle.getString("Jam"));
+
+            if(getSelectedTIme().equalsIgnoreCase("") || (getSelectedTIme() == null))
+            {
+                setSelectedTIme("Jam Belum Dipilih");
+            }
+            if(getSelectedDate().equalsIgnoreCase("") || (getSelectedDate() == null))
+            {
+                setSelectedTIme("Tanggal Belum Diisi");
+            }
+            if(getSelectedName().equalsIgnoreCase("") || (getSelectedName() == null))
+            {
+                setSelectedTIme("Login Belum Dilakukan");
+            }
+
+            tanggalInput = (TextView) findViewById(R.id.tanggal_input);
+            tanggalInput.setText(getSelectedDate());
+            jamInput = (TextView) findViewById(R.id.jam_input);
+            jamInput.setText(getSelectedTIme());
+        }
+
         mEditText = findViewById(R.id.keluhan_input);
         mTextView = findViewById(R.id.keluhan_textCounter);
         submitButton = findViewById(R.id.submit_button);
@@ -72,7 +108,7 @@ public class FormulirActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<FormulirResponse> call, Response<FormulirResponse> response) {
                 if(!response.isSuccessful()){
-                    Toast.makeText(getApplicationContext(), "Error disini: "+response.code(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Error di onResponse: "+response.code(), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Toast.makeText(getApplicationContext(), "Berhasil membuat request",Toast.LENGTH_LONG).show();
@@ -83,7 +119,7 @@ public class FormulirActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<FormulirResponse> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Error disini: "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Error di onFailure: "+t.getMessage(), Toast.LENGTH_SHORT).show();
                 return;
             }
         });
@@ -91,4 +127,27 @@ public class FormulirActivity extends AppCompatActivity {
 
     }
 
+    public String getSelectedDate() {
+        return selectedDate;
+    }
+
+    public void setSelectedDate(String selectedDate) {
+        this.selectedDate = selectedDate;
+    }
+
+    public String getSelectedTIme() {
+        return selectedTIme;
+    }
+
+    public void setSelectedTIme(String selectedTIme) {
+        this.selectedTIme = selectedTIme;
+    }
+
+    public String getSelectedName() {
+        return selectedName;
+    }
+
+    public void setSelectedName(String selectedName) {
+        this.selectedName = selectedName;
+    }
 }

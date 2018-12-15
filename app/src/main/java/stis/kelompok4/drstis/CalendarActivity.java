@@ -83,6 +83,8 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
+                // sharedPrefs mode
+                editor.putString(CalendarActivity.TEXT_TANGGAL, selectText.getText().toString());
                 pesanTanggal(selectText.getText().toString());
             }
         });
@@ -90,9 +92,6 @@ public class CalendarActivity extends AppCompatActivity {
 
     public void pesanTanggal(String pesan)
     {
-        // sharedPrefs mode
-        editor.putString(CalendarActivity.TEXT_TANGGAL, pesan);
-
         // intent mode
         Intent intent = new Intent(this, activity_jadwal.class);
         intent.putExtra("Tanggal", pesan);

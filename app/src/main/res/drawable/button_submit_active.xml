@@ -5,12 +5,12 @@
         android:radius="10dp"/>
     <solid android:color="#44b34b"/>
     <stroke
-        android:width="10dp"
+        android:width="5dp"
         android:color="#BDB76B" />
 
 
-    <padding android:left="10dp"
-        android:right="10dp"
-        android:top="10dp"
-        android:bottom="10dp" />
+    <padding android:left="0dp"
+        android:right="0dp"
+        android:top="0dp"
+        android:bottom="0dp" />
 </shape>

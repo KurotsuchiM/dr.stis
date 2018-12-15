@@ -25,13 +25,14 @@ import java.util.HashMap;
 
 import static java.lang.Boolean.FALSE;
 
-public class activity_jadwal extends AppCompatActivity implements View.OnClickListener
+public class activity_jadwal extends AppCompatActivity
 {
     public static final String TEXT_JAM = "sharedJam";
 
     private boolean selectedTimeStatusAvailable = false;
     private String selectedDate;
     private TextView selectedDateText;
+    private TextView textView;
     private ActivityJadwalAdapter adapter;
     private String selectedTime;
 
@@ -79,14 +80,12 @@ public class activity_jadwal extends AppCompatActivity implements View.OnClickLi
 
         init();
         checkAvailability();
-
+        setListeners();
 
     }
 
     public void init()
     {
-        GridLayout grid = (GridLayout) findViewById(R.id.jamGridLayout_itself);
-        int childCounter = grid.getChildCount();
 
         sharedPreferences = getSharedPreferences(LoginActivity.SHARED_PREFS, MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -95,23 +94,7 @@ public class activity_jadwal extends AppCompatActivity implements View.OnClickLi
         Bundle bundle = intent.getExtras();
         Button pesanJadwal = findViewById(R.id.jadwal_button);
 
-        //STUB: textView listeners
 
-        for (int i = 0; i < childCounter; i++)
-        {
-            grid.
-            RelativeLayout relativeLayout = (RelativeLayout) grid.getChildAt(i);
-            relativeLayout.setOnClickListener(new View.OnClickListener()
-            {
-
-                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                public void onClick(View view)
-                {
-                    //jam0900.setBackground(getResources().getDrawable(R.drawable.button_submit_active));
-                    //int identifier = grid.getChildAt(i).getResources().getIdentifier("button_submit", "drawable", activity_jadwal.getPackageName());
-                }
-            });
-        }
 
 
         // inisialisasi jam availability
@@ -188,6 +171,257 @@ public class activity_jadwal extends AppCompatActivity implements View.OnClickLi
             }
         });
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    public void setListeners()
+    {
+        //STUB: textView listeners
+//        android.support.v7.widget.GridLayout grid = (android.support.v7.widget.GridLayout) findViewById(R.id.jamGridLayout_itself);
+//        int childCounter = grid.getChildCount();
+//
+//        for (int i = 0; i < childCounter; i++)
+//        {
+//            textView = (TextView) grid.getChildAt(i);
+//            textView.setOnClickListener(new View.OnClickListener()
+//            {
+//
+//                @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+//                public void onClick(View view)
+//                {
+//                    textView.setBackground(getResources().getDrawable(R.drawable.button_submit_active));
+//                    //jam0900.setBackground(getResources().getDrawable(R.drawable.button_submit_active));
+//                    //int identifier = grid.getChildAt(i).getResources().getIdentifier("button_submit", "drawable", activity_jadwal.getPackageName());
+//                }
+//            });
+//        }
+
+        jam0900.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(isAvailableAt0900())
+                {
+                    setSelectedTime(jam0900.getText().toString() + ":00");
+                    editor.putString(activity_jadwal.TEXT_JAM, getSelectedTime());
+                    editor.commit();
+                    Toast.makeText(getApplication().getBaseContext(),"Jam yang dipilih tersedia." , Toast.LENGTH_SHORT);
+                }else
+                {
+                    Toast.makeText(getApplication().getBaseContext(),"Jam tidak tersedia, mohon pilih jam yang lain.", Toast.LENGTH_SHORT);
+                }
+            }
+        });
+        jam0930.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(isAvailableAt0900())
+                {
+                    setSelectedTime(jam0930.getText().toString() + ":00");
+                    editor.putString(activity_jadwal.TEXT_JAM, getSelectedTime());
+                    editor.commit();
+                    Toast.makeText(getApplication().getBaseContext(),"Jam yang dipilih tersedia." , Toast.LENGTH_SHORT);
+                }else
+                {
+                    Toast.makeText(getApplication().getBaseContext(),"Jam tidak tersedia, mohon pilih jam yang lain.", Toast.LENGTH_SHORT);
+                }
+
+            }
+        });
+        jam1000.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(isAvailableAt1000())
+                {
+                    setSelectedTime(jam1000.getText().toString() + ":00");
+                    editor.putString(activity_jadwal.TEXT_JAM, getSelectedTime());
+                    editor.commit();
+                    Toast.makeText(getApplication().getBaseContext(),"Jam yang dipilih tersedia." , Toast.LENGTH_SHORT);
+                }else
+                {
+                    Toast.makeText(getApplication().getBaseContext(),"Jam tidak tersedia, mohon pilih jam yang lain.", Toast.LENGTH_SHORT);
+                }
+            }
+        });
+        jam1030.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(isAvailableAt1030())
+                {
+                    setSelectedTime(jam1030.getText().toString() + ":00");
+                    editor.putString(activity_jadwal.TEXT_JAM, getSelectedTime());
+                    editor.commit();
+                    Toast.makeText(getApplication().getBaseContext(),"Jam yang dipilih tersedia." , Toast.LENGTH_SHORT);
+                }else
+                {
+                    Toast.makeText(getApplication().getBaseContext(),"Jam tidak tersedia, mohon pilih jam yang lain.", Toast.LENGTH_SHORT);
+                }
+            }
+        });
+        jam1100.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(isAvailableAt1100())
+                {
+                    setSelectedTime(jam1100.getText().toString() + ":00");
+                    editor.putString(activity_jadwal.TEXT_JAM, getSelectedTime());
+                    editor.commit();
+                    Toast.makeText(getApplication().getBaseContext(),"Jam yang dipilih tersedia." , Toast.LENGTH_SHORT);
+                }else
+                {
+                    Toast.makeText(getApplication().getBaseContext(),"Jam tidak tersedia, mohon pilih jam yang lain.", Toast.LENGTH_SHORT);
+                }
+            }
+        });
+        jam1130.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(isAvailableAt1130())
+                {
+                    setSelectedTime(jam1130.getText().toString() + ":00");
+                    editor.putString(activity_jadwal.TEXT_JAM, getSelectedTime());
+                    editor.commit();
+                    Toast.makeText(getApplication().getBaseContext(),"Jam yang dipilih tersedia." , Toast.LENGTH_SHORT);
+                }else
+                {
+                    Toast.makeText(getApplication().getBaseContext(),"Jam tidak tersedia, mohon pilih jam yang lain.", Toast.LENGTH_SHORT);
+                }
+            }
+        });
+        jam1200.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(isAvailableAt1200())
+                {
+                    setSelectedTime(jam1200.getText().toString() + ":00");
+                    editor.putString(activity_jadwal.TEXT_JAM, getSelectedTime());
+                    editor.commit();
+                    Toast.makeText(getApplication().getBaseContext(),"Jam yang dipilih tersedia." , Toast.LENGTH_SHORT);
+                }else
+                {
+                    Toast.makeText(getApplication().getBaseContext(),"Jam tidak tersedia, mohon pilih jam yang lain.", Toast.LENGTH_SHORT);
+                }
+            }
+        });
+        jam1300.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(isAvailableAt1300())
+                {
+                    setSelectedTime(jam1300.getText().toString() + ":00");
+                    editor.putString(activity_jadwal.TEXT_JAM, getSelectedTime());
+                    editor.commit();
+                    Toast.makeText(getApplication().getBaseContext(),"Jam yang dipilih tersedia." , Toast.LENGTH_SHORT);
+                }else
+                {
+                    Toast.makeText(getApplication().getBaseContext(),"Jam tidak tersedia, mohon pilih jam yang lain.", Toast.LENGTH_SHORT);
+                }
+            }
+        });
+        jam1330.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(isAvailableAt1330())
+                {
+                    setSelectedTime(jam1330.getText().toString() + ":00");
+                    editor.putString(activity_jadwal.TEXT_JAM, getSelectedTime());
+                    editor.commit();
+                    Toast.makeText(getApplication().getBaseContext(),"Jam yang dipilih tersedia." , Toast.LENGTH_SHORT);
+                }else
+                {
+                    Toast.makeText(getApplication().getBaseContext(),"Jam tidak tersedia, mohon pilih jam yang lain.", Toast.LENGTH_SHORT);
+                }
+            }
+        });
+        jam1400.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(isAvailableAt1400())
+                {
+                    setSelectedTime(jam1400.getText().toString() + ":00");
+                    editor.putString(activity_jadwal.TEXT_JAM, getSelectedTime());
+                    editor.commit();
+                    Toast.makeText(getApplication().getBaseContext(),"Jam yang dipilih tersedia." , Toast.LENGTH_SHORT);
+                }else
+                {
+                    Toast.makeText(getApplication().getBaseContext(),"Jam tidak tersedia, mohon pilih jam yang lain.", Toast.LENGTH_SHORT);
+                }
+            }
+        });
+        jam1430.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(isAvailableAt1430())
+                {
+                    setSelectedTime(jam1430.getText().toString() + ":00");
+                    editor.putString(activity_jadwal.TEXT_JAM, getSelectedTime());
+                    editor.commit();
+                    Toast.makeText(getApplication().getBaseContext(),"Jam yang dipilih tersedia." , Toast.LENGTH_SHORT);
+                }else
+                {
+                    Toast.makeText(getApplication().getBaseContext(),"Jam tidak tersedia, mohon pilih jam yang lain.", Toast.LENGTH_SHORT);
+                }
+            }
+        });
+        jam1500.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(isAvailableAt1500())
+                {
+                    setSelectedTime(jam1500.getText().toString() + ":00");
+                    editor.putString(activity_jadwal.TEXT_JAM, getSelectedTime());
+                    editor.commit();
+                    Toast.makeText(getApplication().getBaseContext(),"Jam yang dipilih tersedia." , Toast.LENGTH_SHORT);
+                }else
+                {
+                    Toast.makeText(getApplication().getBaseContext(),"Jam tidak tersedia, mohon pilih jam yang lain.", Toast.LENGTH_SHORT);
+                }
+            }
+        });
+        jam1530.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(isAvailableAt1530())
+                {
+                    setSelectedTime(jam1530.getText().toString() + ":00");
+                    editor.putString(activity_jadwal.TEXT_JAM, getSelectedTime());
+                    editor.commit();
+                    Toast.makeText(getApplication().getBaseContext(),"Jam yang dipilih tersedia." , Toast.LENGTH_SHORT);
+                }else
+                {
+                    Toast.makeText(getApplication().getBaseContext(),"Jam tidak tersedia, mohon pilih jam yang lain.", Toast.LENGTH_SHORT);
+                }
+            }
+        });
+        jam1600.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(isAvailableAt1600())
+                {
+                    setSelectedTime(jam1600.getText().toString() + ":00");
+                    editor.putString(activity_jadwal.TEXT_JAM, getSelectedTime());
+                    editor.commit();
+                    Toast.makeText(getApplication().getBaseContext(),"Jam yang dipilih tersedia." , Toast.LENGTH_SHORT);
+                }else
+                {
+                    Toast.makeText(getApplication().getBaseContext(),"Jam tidak tersedia, mohon pilih jam yang lain.", Toast.LENGTH_SHORT);
+                }
+            }
+        });
+    }
+
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void checkAvailability()
@@ -429,8 +663,4 @@ public class activity_jadwal extends AppCompatActivity implements View.OnClickLi
         this.availableAt1600 = availableAt1600;
     }
 
-    @Override
-    public void onClick(View view) {
-
-    }
 }

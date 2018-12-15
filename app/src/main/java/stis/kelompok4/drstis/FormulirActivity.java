@@ -62,6 +62,7 @@ public class FormulirActivity extends AppCompatActivity {
             // setSelectedTIme(sharedPreferences.getString(activity_jadwal.TEXT_JAM,""));
             setSelectedDate((String) bundle.getString("Tanggal"));
             setSelectedTIme((String) bundle.getString("Jam"));
+            setSelectedTIme(sharedPreferences.getString(activity_jadwal.TEXT_JAM,""));
 
             if(getSelectedTIme().equalsIgnoreCase("") || (getSelectedTIme() == null))
             {

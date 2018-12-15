@@ -435,20 +435,19 @@ public class activity_jadwal extends AppCompatActivity
     public void checkAvailability()
     {
         ArrayList<String> listJam = new ArrayList<>();
-        String tanggal[] = getSelectedDate().split("-");
-        String tanggalReversed = tanggal[2] + tanggal[1] + tanggal[0];
         //int id = getResources().getIdentifier("")
         try
         {
-
             // Filter semua tanggal di server dengan tanggal yang dipilih
             for(JadwalResponse jadwal: listJadwal)
             {
-                if(jadwal.getReservasiTanggal().equalsIgnoreCase(tanggalReversed))
+                if(jadwal.getReservasiTanggal().equalsIgnoreCase(getSelectedDate()))
                 {
                     listJam.add(jadwal.getReservasiJam());
                 }
             }
+
+
             // Filter jam yang di server dengan tanggal yang dipilih
             for(String x:listJam)
             {
@@ -621,14 +620,6 @@ public class activity_jadwal extends AppCompatActivity
 
     public void setSelectedDate(String selectedDate) {
         this.selectedDate = selectedDate;
-    }
-
-    public boolean isSelectedTimeStatusAvailable() {
-        return selectedTimeStatusAvailable;
-    }
-
-    public void setSelectedTimeStatusAvailable(boolean selectedTimeStatus) {
-        this.selectedTimeStatusAvailable = selectedTimeStatus;
     }
 
     public String getSelectedTime() {

@@ -25,18 +25,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="41dp"
-        android:layout_marginRight="55dp"
+        android:layout_marginRight="13dp"
         android:text="Log out"
         android:textColor="@color/colorLogOut" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="0dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -51,6 +50,7 @@
 
         <Button
             android:id="@+id/loginButton"
+            android:background="@drawable/button_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:width="120dp"
@@ -59,6 +59,7 @@
 
         <Button
             android:id="@+id/signUpButton"
+            android:background="@drawable/button_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -68,6 +69,7 @@
 
         <Button
             android:id="@+id/cekJadwalButton"
+            android:background="@drawable/button_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -78,6 +80,7 @@
 
         <Button
             android:id="@+id/reservasiButton"
+            android:background="@drawable/button_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:width="120dp"

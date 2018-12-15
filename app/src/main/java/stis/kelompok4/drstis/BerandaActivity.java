@@ -2,11 +2,13 @@ package stis.kelompok4.drstis;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class BerandaActivity extends AppCompatActivity {
 
@@ -83,6 +85,7 @@ public class BerandaActivity extends AppCompatActivity {
         logoutTextView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                destroyData();
                 Intent intent = new Intent(BerandaActivity.this, BerandaActivity.class);
                 BerandaActivity.this.startActivity(intent);
             }
@@ -97,6 +100,15 @@ public class BerandaActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void destroyData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.SHARED_PREFS, MODE_PRIVATE);
+        if (sharedPreferences.edit().clear().commit()){
+            Toast.makeText(getApplicationContext(), "Berhasil Logout.", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(getApplicationContext(), "Gagal Logout.", Toast.LENGTH_SHORT).show();
+        }
     }
 }
 

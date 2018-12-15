@@ -1,6 +1,7 @@
 package stis.kelompok4.drstis;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
+
+import java.text.Normalizer;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,6 +33,9 @@ public class FormulirActivity extends AppCompatActivity {
     private TextView tanggalInput;
     private TextView jamInput;
 
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +47,17 @@ public class FormulirActivity extends AppCompatActivity {
 
     private void init()
     {
+        sharedPreferences = getSharedPreferences(LoginActivity.SHARED_PREFS, MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if(bundle != null)
         {
+            setSelectedName(sharedPreferences.getString(LoginActivity.TEXT_NAMA,""));
+
+            // setSelectedDate(sharedPreferences.getString(CalendarActivity.TEXT_TANGGAL,""));
+            // setSelectedTIme(sharedPreferences.getString(activity_jadwal.TEXT_JAM,""));
             setSelectedDate((String) bundle.getString("Tanggal"));
             setSelectedTIme((String) bundle.getString("Jam"));
 
@@ -54,17 +67,19 @@ public class FormulirActivity extends AppCompatActivity {
             }
             if(getSelectedDate().equalsIgnoreCase("") || (getSelectedDate() == null))
             {
-                setSelectedTIme("Tanggal Belum Diisi");
+                setSelectedDate("Tanggal Belum Diisi");
             }
             if(getSelectedName().equalsIgnoreCase("") || (getSelectedName() == null))
             {
-                setSelectedTIme("Login Belum Dilakukan");
+                setSelectedName("Login Belum Dilakukan");
             }
 
             tanggalInput = (TextView) findViewById(R.id.tanggal_input);
             tanggalInput.setText(getSelectedDate());
             jamInput = (TextView) findViewById(R.id.jam_input);
             jamInput.setText(getSelectedTIme());
+            namaInput = (TextView) findViewById(R.id.nama_input);
+            namaInput.setText(getSelectedName());
         }
 
         mEditText = findViewById(R.id.keluhan_input);

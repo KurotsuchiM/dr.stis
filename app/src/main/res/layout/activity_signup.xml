@@ -27,6 +27,7 @@
                 android:textSize="32dp" />
 
             <Button
+                android:id="@+id/btn_Signup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sign up" />
@@ -43,6 +44,7 @@
                     android:text="Email STIS                    : " />
 
                 <EditText
+                    android:id="@+id/add_Email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -59,6 +61,7 @@
                     android:text="Nama lengkap              : " />
 
                 <EditText
+                    android:id="@+id/add_Namalengkap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -75,6 +78,7 @@
                     android:text="Password                      : " />
 
                 <EditText
+                    android:id="@+id/add_Password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -91,6 +95,7 @@
                     android:text="Konfirmasi Password  : " />
 
                 <EditText
+                    android:id="@+id/add_ConfPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>

@@ -111,6 +111,14 @@
 
     </ScrollView>
 
+    <TextView
+        android:id="@+id/error_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="11dp"
+        android:textColor="#f00"/>
+
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
